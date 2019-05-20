@@ -1,0 +1,77 @@
+.error {
+  color: red;
+}
+
+.warning {
+  color: #F1C40F;
+}
+
+.success {
+  color: #36c6d3;
+}
+
+#layout{
+  width: 100%;
+  min-height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 999999;
+  text-align: center;
+  display: none;
+  position: fixed;
+}
+
+#contact-table th {
+  text-align: center;
+}
+
+label{
+  text-align: left !important;
+}
+#logo_preview{
+  height: 200px;
+}
+#create-partner-modal .modal-dialog{
+  width: 80%;
+}
+#edit-partner-modal .modal-dialog{
+  width: 80%;
+}
+.logo-on-table{
+  width: 100px;
+}
+#partner-table tbody td{
+  vertical-align: middle;
+}
+label span{
+  color: red;
+}
+.validate_noti{
+  font-size: 12px;
+  color: red;
+}
+#show_partner_name{
+  line-height: 40px;
+  font-size: 35px;
+  font-weight: bold;
+  color: gray;
+}
+#show_partner_address{
+  line-height: 20px;
+}
+#show_hr_name,#show_hr_email,#show_hr_mobile{
+  line-height: 20px;
+  font-size: 13px;
+}
+#show_logo{
+  margin-bottom: 30px;
+}
+#show_partner_introduction{
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: lighter;
+  padding: 0 20px;
+  overflow: auto;
+}
+#show-partner-modal span{
+  font-weight: bold;
+}

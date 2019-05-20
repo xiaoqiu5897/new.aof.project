@@ -1,0 +1,1 @@
+$('div.alert').delay(300).slideUp();

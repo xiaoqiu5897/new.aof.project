@@ -1,0 +1,29 @@
+.error {
+  color: red;
+}
+
+.warning {
+  color: #F1C40F;
+}
+
+.success {
+  color: #36c6d3;
+}
+
+#layout{
+  width: 100%;
+  min-height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 999999;
+  text-align: center;
+  display: none;
+  position: fixed;
+}
+
+#contact-table th {
+  text-align: center;
+}
+
+label{
+  text-align: left !important;
+}

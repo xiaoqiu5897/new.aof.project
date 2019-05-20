@@ -1,0 +1,30 @@
+ .error{
+   color: red;
+   display: show;
+  }
+  .dt-center{
+    text-align: center;
+  }
+  .dt-right{
+    text-align: right;
+  }
+  .nav-tabs>li.active>a {
+    border:none !important;
+    border-bottom: 3px solid orange !important;
+  }
+  td, th{
+    text-align: center;
+  }
+  .td-content{
+    max-width: 600px;
+  }
+  .td-yb-content{
+    max-width: 300px;
+  }
+  .td-embed{
+    max-width: 500px;
+  }
+  #social-post-youtube iframe{
+    max-width: 400px;
+    height: auto;
+  }
