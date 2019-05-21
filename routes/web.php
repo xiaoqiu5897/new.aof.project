@@ -17,6 +17,8 @@ Route::get('forgot-password', ['as'	=>	'forgot-password','uses' =>	'Auth\LoginCo
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('dashboard', 'HomeController@index');
 	//phiếu thu
+	Route::get('get-list-cash-receipt-voucher', 'CashReceiptVoucherController@getList')->name('get-list-cash-receipt-voucher');
+	Route::get('get-group-object', 'CashReceiptVoucherController@getGroupObject');
 	Route::resource('cash-receipt-voucher', 'CashReceiptVoucherController');
 	//hết
 	//phiếu chi

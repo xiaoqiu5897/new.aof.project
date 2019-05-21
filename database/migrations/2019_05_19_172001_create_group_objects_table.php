@@ -23,7 +23,7 @@ class CreateGroupObjectsTable extends Migration
             $table->string('mobile');
             $table->string('tax_code');
             $table->string('bank_account');
-            $table->integer('back_code')->unsigned();
+            $table->integer('bank_id')->unsigned();
             $table->timestamps();
         });
     }
