@@ -27,7 +27,13 @@
 @endsection
 
 @section('contents')
-
+<div class="modal fade bs-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg ">
+		<div class="modal-content">
+			{{-- call ajax here --}}
+		</div>
+	</div>
+</div>
 <div class="portlet light bordered">
 	<div class="portlet-title">
 		<div class="caption" style="font-size: 14px">
@@ -113,10 +119,10 @@
 		</div>
 		<div class="clearfix"></div>
 		<div id="print_cash_book">
-			<a class="btn" href="" id="btn_print_cash_book" style="background: #ffa331; color:white; float: right; margin-right: 15px;"><i class="fa fa-print" style="font-size: 16px;"></i> Print</a>
+			<a class="btn" href="" data-url="{{route('cash-book.print-show')}}" id="btn_print" style="background: #ffa331; color:white; float: right; margin-right: 15px; margin-bottom: 15px;"><i class="fa fa-print" style="font-size: 16px;"></i> Print</a>
 		</div>
 		<div id="export-excel">
-			<a class="btn btn-success" href="" id="btn_export" style="float: right; margin-right: 15px;"><i style="font-size: 16px;" class="fa fa-file-excel"></i> Export</a>
+			<a class="btn btn-success" href="" id="btn_export" style="float: right; margin-right: 15px; margin-bottom: 15px;"><i style="font-size: 16px;" class="fa fa-file-excel"></i> Export</a>
 		</div>
 		<div class="clearfix"></div>
 		<div class="panel panel-default">
@@ -186,31 +192,31 @@
 <script type="text/javascript">
 	$(document).on('change', '#reporting_period', function () {
 		var d = new Date();
-        var currMonth = d.getMonth();
-        var currYear = d.getFullYear();
-        $("#start_date").datepicker({format: 'dd/mm/yyyy',});
-        $("#end_date").datepicker({format: 'dd/mm/yyyy',});
+		var currMonth = d.getMonth();
+		var currYear = d.getFullYear();
+		$("#start_date").datepicker({format: 'dd/mm/yyyy',});
+		$("#end_date").datepicker({format: 'dd/mm/yyyy',});
 		if ($('#reporting_period').val() == "Qúy này") {
 			var startDate = new Date();
 			var endDate = new Date();
 			if (currMonth + 1 >= 1 && currMonth + 1 <= 3) {
 				startDate = new Date(currYear, 1-1, 1);
-        		endDate = new Date(currYear, 3-1, 31);
+				endDate = new Date(currYear, 3-1, 31);
 			}
 			if (currMonth + 1 > 3 && currMonth + 1 <= 6) {
 				startDate = new Date(currYear, 4-1, 1);
-        		endDate = new Date(currYear, 6-1, 30);
+				endDate = new Date(currYear, 6-1, 30);
 			}
 			if (currMonth + 1 > 6 && currMonth + 1 <= 9) {
 				startDate = new Date(currYear, 7-1, 1);
-        		endDate = new Date(currYear, 9-1, 30);
+				endDate = new Date(currYear, 9-1, 30);
 			}
 			if (currMonth + 1 > 9 && currMonth + 1 <= 12) {
 				startDate = new Date(currYear, 10-1, 1);
-        		endDate = new Date(currYear, 12-1, 31);
+				endDate = new Date(currYear, 12-1, 31);
 			}
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Đầu quý đến hiện tại') {
 			var startDate = new Date();
 			var endDate = new Date();
@@ -227,128 +233,128 @@
 				startDate = new Date(currYear, 10-1, 1);
 			}
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Năm nay') {
 			var startDate = new Date(currYear, 1-1, 1);
-        	var endDate = new Date(currYear, 12-1, 31);
+			var endDate = new Date(currYear, 12-1, 31);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Đầu năm đến hiện tại') {
 			var startDate = new Date(currYear, 1-1, 1);
-        	var endDate = new Date();
+			var endDate = new Date();
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 1') {
-        	var startDate = new Date(currYear, 1-1, 1);
-        	var endDate = new Date(currYear, 1-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var startDate = new Date(currYear, 1-1, 1);
+			var endDate = new Date(currYear, 1-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 2') {
 			var startDate = new Date(currYear, 2-1, 1);
-        	var endDate = new Date(currYear, 2-1, 28);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 2-1, 28);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 3') {
 			var startDate = new Date(currYear, 3-1, 1);
-        	var endDate = new Date(currYear, 3-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 3-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 4') {
 			var startDate = new Date(currYear, 4-1, 1);
-        	var endDate = new Date(currYear, 4-1, 30);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 4-1, 30);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 5') {
 			var startDate = new Date(currYear, 5-1, 1);
-        	var endDate = new Date(currYear, 5-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 5-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 6') {
 			var startDate = new Date(currYear, 6-1, 1);
-        	var endDate = new Date(currYear, 6-1, 30);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 6-1, 30);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 7') {
 			var startDate = new Date(currYear, 7-1, 1);
-        	var endDate = new Date(currYear, 7-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 7-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 8') {
 			var startDate = new Date(currYear, 8-1, 1);
-        	var endDate = new Date(currYear, 8-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 8-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 9') {
 			var startDate = new Date(currYear, 9-1, 1);
-        	var endDate = new Date(currYear, 9-1, 30);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 9-1, 30);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 10') {
 			var startDate = new Date(currYear, 10-1, 1);
-        	var endDate = new Date(currYear, 10-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 10-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 11') {
 			var startDate = new Date(currYear, 11-1, 1);
-        	var endDate = new Date(currYear, 11-1, 30);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 11-1, 30);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng 12') {
 			var startDate = new Date(currYear, 12-1, 1);
-        	var endDate = new Date(currYear, 12-1, 31);
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			var endDate = new Date(currYear, 12-1, 31);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Qúy I') {
 			var startDate = new Date(currYear, 1-1, 1);
-        	var endDate = new Date(currYear, 3-1, 31);
+			var endDate = new Date(currYear, 3-1, 31);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Qúy II') {
 			var startDate = new Date(currYear, 4-1, 1);
-        	var endDate = new Date(currYear, 6-1, 30);
+			var endDate = new Date(currYear, 6-1, 30);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Qúy III') {
 			var startDate = new Date(currYear, 7-1, 1);
-        	var endDate = new Date(currYear, 9-1, 30);
+			var endDate = new Date(currYear, 9-1, 30);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Qúy IV') {
 			var startDate = new Date(currYear, 10-1, 1);
-        	var endDate = new Date(currYear, 12-1, 31);
+			var endDate = new Date(currYear, 12-1, 31);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Tháng trước') {
 			var startDate = new Date(currYear, currMonth-1, 1);
-        	var endDate = new Date(currYear, currMonth, 0);
+			var endDate = new Date(currYear, currMonth, 0);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Qúy trước') {
 			var startDate = new Date();
 			var endDate = new Date();
 			if (currMonth + 1 >= 1 && currMonth + 1 <= 3) {
 				startDate = new Date(currYear-1, 10-1, 1);
-        		endDate = new Date(currYear-1, 12-1, 31);
+				endDate = new Date(currYear-1, 12-1, 31);
 			}
 			if (currMonth + 1 > 3 && currMonth + 1 <= 6) {
 				startDate = new Date(currYear, 1-1, 1);
-        		endDate = new Date(currYear, 3-1, 31);
+				endDate = new Date(currYear, 3-1, 31);
 			}
 			if (currMonth + 1 > 6 && currMonth + 1 <= 9) {
 				startDate = new Date(currYear, 4-1, 1);
-        		endDate = new Date(currYear, 6-1, 30);
+				endDate = new Date(currYear, 6-1, 30);
 			}
 			if (currMonth + 1 > 9 && currMonth + 1 <= 12) {
 				startDate = new Date(currYear, 7-1, 1);
-        		endDate = new Date(currYear, 9-1, 30);
+				endDate = new Date(currYear, 9-1, 30);
 			}
-        	$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#start_date").datepicker("setDate", startDate);
+			$("#end_date").datepicker("setDate", endDate);
 		} else if ($('#reporting_period').val() == 'Năm trước') {
 			var startDate = new Date(currYear-1, 1-1, 1);
-        	var endDate = new Date(currYear-1, 12-1, 31);
+			var endDate = new Date(currYear-1, 12-1, 31);
 			$("#start_date").datepicker("setDate", startDate);
-        	$("#end_date").datepicker("setDate", endDate);
+			$("#end_date").datepicker("setDate", endDate);
 		}
 	})
 </script>
@@ -406,41 +412,11 @@
 						]
 					});
 
-				}else if (start_date == '' && end_date == '') {
-					$('#btn_export').attr('href','/0/0/'+reporting_period+'/'+account_finance);
-					$('#list-table').DataTable().destroy();
-					$('#list-table').DataTable({
-						processing: true,
-						serverSide: true,
-						ajax: {
-							url: '',
-							type: 'post',
-							data: function (d) {
-								d.start_date = $('input[name=start_date]').val();
-								d.end_date = $('input[name=end_date]').val();
-								d.type = $('select[name=type]').val();
-								d.mainledgerable_type = $('select[name=mainledgerable_type]').val();
-                        },
-                    },
-                    lengthMenu: [100],
-                    ordering: false,
-                    pageLength: 30,
-                    lengthMenu: [[30, 50, 100, 200, 500], [30, 50, 100, 200, 500]],
-                    columns: [
-                    {data: 'DT_Row_Index', name: 'DT_Row_Index', 'class':'text-center', width: "10px"},
-                    {data: 'type', name: 'type', width: "150px", searchable:false},
-                    {data: 'user', name: 'user', width: "120px"},
-                    {data: 'user-make', name: 'user-make'},
-                    {data: 'date', name: 'date', class: 'text-center'},
-                    {data: 'content', name: 'content'},
-                    {data: 'amount', name: 'amount', class:'text-right'},
-                    ]
-                });
-				}else if (start_date > end_date) {
+				} else if (start_date > end_date) {
 					toastr.error('Ngày bắt đầu phải trước ngày kết thúc!');
-				}else if (start_date != '' && end_date == '') {
+				} else if (start_date != '' && end_date == '') {
 					toastr.error('Cần nhập đầy đủ thời gian bắt đầu và kết thúc!');
-				}else if (start_date == '' && end_date != '') {
+				} else if (start_date == '' && end_date != '') {
 					toastr.error('Cần nhập đầy đủ thời gian bắt đầu và kết thúc!');
 				}
 
@@ -449,5 +425,101 @@
 		}); 
 	})
 </script>
+<script type="text/javascript">
+	function format_number(num){
+		var str = num.toString().replace("$", ""), parts = false, output = [], i = 1, formatted = null;
+		if(str.indexOf(".") > 0) {
+			parts = str.split(".");
+			str = parts[0];
+		}
+		str = str.split("").reverse();
+		for(var j = 0, len = str.length; j < len; j++) {
+			if(str[j] != ".") {
+				output.push(str[j]);
+				if(i%3 == 0 && j < (len - 1)) {
+					output.push(".");
+				}
+				i++;
+			}
+		}
+		formatted = output.reverse().join("");
+		return(formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+	};
 
+</script>
+<script type="text/javascript">
+	$(document).on('click', '#btn_print', function (e) {
+		e.preventDefault();
+		var path = $(this).data('url');
+		var start_date = $('#start_date').val();
+		var end_date = $('#end_date').val();
+		var reporting_period = $('#reporting_period').val();
+		var account_finance = $('#account_finance').val();
+		$.ajax({
+			type: 'post',
+			url: '/cash-book/print',
+			data: {
+				start_date: start_date,
+				end_date: end_date,
+				reporting_period: reporting_period,
+				account_finance: account_finance
+			},
+			success: function (response) {
+				console.log(response)
+				$('.modal-content').load(path, function(){
+					$('#myModal').modal({show:true})
+					$('.account_finance').html(response.account_finance.code + ' - ' + response.account_finance.name)
+					var surplus_debit = response.account_finance.surplus_debit;
+					var money = surplus_debit;
+					$('.voucher-detail-table').append(`
+						<tr>
+						<td width="75px"></td>
+						<td width="75px"></td>
+						<td></td>
+						<td></td>
+						<td>- Số tồn đầu kỳ</td>
+						<td></td>
+						<td></td>
+						<td align="right">` + format_number(surplus_debit) + `</td>
+						<td></td>
+						</tr>`)
+					$.each(response.voucher_details, function(i, item) {
+						if (item.type == 1) { 
+							money += item.amount_money
+							$('.voucher-detail-table').append(`
+								<tr>
+								<td>` + item.accounting_date1 + `</td>
+								<td>` + item.created_at1 + `</td>
+								<td align="center">` + item.code + `</td>
+								<td align="center"></td>
+								<td>` + item.content + `</td>
+								<td align="right">` + format_number(item.amount_money) + `</td>
+								<td></td>
+								<td align="right">` + format_number(money) + `</td>
+								<td></td>
+								</tr>`)
+						}
+						if (item.type == 2) {
+							money -= item.amount_money
+							$('.voucher-detail-table').append(`
+								<tr>
+								<td>` + item.accounting_date1 + `</td>
+								<td>` + item.created_at1 + `</td>
+								<td align="center"></td>
+								<td align="center">` + item.code + `</td>
+								<td>` + item.content + `</td>
+								<td></td>
+								<td align="right">` + format_number(item.amount_money) + `</td>
+								<td align="right">` + format_number(money) + `</td>
+								<td></td>
+								</tr>`)
+						}
+					})
+
+				})
+
+			}
+		})
+	})
+</script>
 @endsection
