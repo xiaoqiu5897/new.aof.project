@@ -132,7 +132,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\aof.project\resources\assets\js\backup-database.js */"./resources/assets/js/backup-database.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\new.aof.project\resources\assets\js\backup-database.js */"./resources/assets/js/backup-database.js");
 
 
 /***/ })

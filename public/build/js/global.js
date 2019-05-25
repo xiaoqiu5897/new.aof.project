@@ -125,7 +125,7 @@ $.extend(true, $.fn.dataTable.defaults, {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\aof.project\resources\assets\js\global.js */"./resources/assets/js/global.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\new.aof.project\resources\assets\js\global.js */"./resources/assets/js/global.js");
 
 
 /***/ })

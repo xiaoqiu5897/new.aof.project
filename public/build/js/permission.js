@@ -325,7 +325,7 @@ tinymce.init({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\aof.project\resources\assets\js\permission.js */"./resources/assets/js/permission.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\new.aof.project\resources\assets\js\permission.js */"./resources/assets/js/permission.js");
 
 
 /***/ })
