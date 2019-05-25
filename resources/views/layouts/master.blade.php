@@ -70,10 +70,11 @@
         @media screen and (max-width: 415px){
          .responsemodal{
             width:145%;
-
-
         }
+    }
 
+    .modal-footer .btn+.btn{
+        margin: auto;
     }
 
     #cover {
@@ -348,26 +349,23 @@
                         <h3 class="uppercase">Quản trị hệ thống</h3>
                     </li>
 
-                    <li class="nav-item {{ Request::is('students') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
+                    <li class="nav-item {{ Request::is('users*') ? 'active open' : '' }}  ">
+                        <a href="{{route('users.index')}}" class="nav-link nav-toggle">
                             <i class="fa fa-user"></i>
                             <span class="title">Quản lý Người dùng</span>
                         </a>
                     </li>
                     
                     <li class="nav-item {{ Request::is('role*') ? 'active open' : '' }}">
-                        <a href="" class="nav-link nav-toggle">
-
+                        <a href="{{route('roles.index')}}" class="nav-link nav-toggle">
                             <i class="icon-lock ion" aria-hidden="true"></i>
                             <span class="title">Vai trò</span>
                         </a>
                     </li>
 
-
                     <li class="nav-item {{ Request::is('permission*') ? 'active open' : '' }}">
-                        <a href="" class="nav-link nav-toggle">
+                        <a href="{{route('permissions.index')}}" class="nav-link nav-toggle">
                             <i class="icon-shield ion" aria-hidden="true"></i>
-
                             <span class="title">Quyền hạn</span>
                         </a>
                     </li>

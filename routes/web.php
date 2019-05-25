@@ -40,4 +40,55 @@ Route::group(['middleware' => 'auth'], function () {
 	//Sổ tiền gửi
 	Route::resource('bank-deposit-book', 'BankDepositBookController');
 	//hết
+	//quyền hạn
+	Route::get('list-permission', ['as' => 'users.list-permission', 'uses' => 'PermissionController@getListPermission']);
+	Route::resource('permissions', 'PermissionController');
+	//hết
+	//vai trò
+	Route::get('roles/{name}/permissions', 'RoleController@getPermissions')->name('user.role-permissions');
+
+	Route::get('roles/list-permissions/{name}', 'RoleController@getListPermission')->name('user.role-list-permissions');
+
+	Route::post('roles/permissions', 'RoleController@postPermissions')->name('user.update-role-permissions');
+
+	Route::get('list-role', ['as' => 'users.list-role', 'uses' => 'RoleController@getListRole']);
+
+	Route::resource('roles', 'RoleController');
+	//hết
+	//người dùng
+	Route::get('users/get_all_user_select_option', 'User\UserController@getAllUserSelectOption')->name('user.getAllUserSelectOption');
+
+	Route::get('users/{id}/roles', 'User\UserController@getRoles')->name('user.roles');
+
+	Route::post('users/roles', 'User\UserController@postRoles')->name('user.update-roles');
+
+	Route::get('profiles', ['as' => 'users.profiles', 'uses' => 'User\ProfileController@getProfiles']);
+	Route::post('updateavatar', ['as' => 'users.updateavatar', 'uses' => 'User\ProfileController@updateavatar']);
+
+	Route::put('profiles', ['as' => 'users.update-profiles', 'uses' => 'User\ProfileController@putUpdateProfiles']);
+	
+	Route::put('update-password', ['as' => 'users.update-password', 'uses' => 'User\ProfileController@putUpdatePassword']);
+
+	Route::get('list-user', ['as' => 'users.list-user', 'uses' => 'User\UserController@getListUser']); 
+  
+	Route::get('users/{id}/coursewares', 'User\UserController@getCourseware');
+	Route::get('users/{id}/listCourseware', 'User\UserController@listCourseware');
+	Route::get('users/{id}/listexercise', 'User\UserController@listexercise');
+
+	Route::get('users/list-theory', 'User\UserController@getListTheory')->name('user.list-theory');
+
+	Route::post('users/toggle-theories', 'User\UserController@postToggleTheories')->name('user.toggle-theories');
+
+	Route::post('users/toggle-exercises', 'User\UserController@postToggleExercises')->name('user.toggle-exercises');
+
+	Route::resource('users', 'User\UserController');
+
+	Route::post('get-info-user', 'User\UserController@getInfoUser')
+	->name('get-info-user');
+
+	Route::post('update-info-user', 'User\UserController@updateInfoUser')
+	->name('update-info-user');
+
+	Route::post('unlock-user','User\UserController@unlockUser')->name('unlock_user');
+	//hết
 });
