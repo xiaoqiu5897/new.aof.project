@@ -17,16 +17,16 @@ class CreateVouchersTable extends Migration
             $table->increments('id');
             $table->string('code')->unique();
             $table->string('type');
-            $table->dateTime('accounting_date');
-            $table->integer('object_id')->unsigned();
+            $table->date('accounting_date');
+            $table->integer('object_id')->unsigned()->nullable();
             $table->string('name_payer');
-            $table->string('addrress');
+            $table->string('addrress')->nullable();
             $table->string('reason');
-            $table->integer('money_id')->unsigned();
-            $table->string('exchange_rate');
-            $table->string('account_to');
-            $table->string('account_from');
-            $table->string('status');
+            $table->string('money')->nullable();
+            $table->string('exchange_rate')->nullable();
+            $table->string('account_to')->nullable();
+            $table->integer('bank_account_id')->unsigned()->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

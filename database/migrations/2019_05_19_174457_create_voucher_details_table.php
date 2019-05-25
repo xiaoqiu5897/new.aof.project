@@ -16,8 +16,8 @@ class CreateVoucherDetailsTable extends Migration
         Schema::create('voucher_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('voucher_id')->unsigned();
-            $table->integer('debit_account_id')->unsigned();
-            $table->integer('credit_account_id')->unsigned();
+            $table->integer('debit_account')->unsigned();
+            $table->integer('credit_account')->unsigned();
             $table->bigInteger('amount_money');
             $table->string('content');
             $table->timestamps();

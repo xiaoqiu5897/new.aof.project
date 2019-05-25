@@ -1,9 +1,9 @@
 <div class="modal-header ">
     <center>
-        <h4 class="modal-title green">PHIẾU THU</h4>
+        <h4 class="modal-title green">PHIẾU CHI</h4>
     </center>
 </div>
-<form action="" method="POST" data-path="{{ route('cash-receipt-voucher.store') }}" role="form" enctype="multipart/form-data" id="add_receipt_voucher_form" class="row" >
+<form action="" method="POST" data-path="{{ route('cash-payment-voucher.store') }}" role="form" enctype="multipart/form-data" id="add_payment_voucher_form" class="row" >
     <div class="modal-body">
         <div class="col-md-10 row">
             <div class="form-group col-md-6">
@@ -21,18 +21,28 @@
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="">Người nộp</label>
+                <label for="">Người nhận</label>
                 <input name="name_payer" type="text" class="form-control" id="name_payer" >
             </div>
             <div class="form-group col-md-6">
                 <label for="">Địa chỉ</label>
                 <input name="addrress" type="text" class="form-control" id="addrress" >
             </div>
-            <div class="form-group col-md-12">
-                <label for="">Lí do nộp</label>
-                <input name="reason" type="text" class="form-control" id="reason" >
+            <div class="col-md-12 row" >
+                <div class="form-group col-md-6" style="padding-right: 0px">
+                    <label for="">Lí do chi</label>
+                    <select name="reason" id="reason" class="form-control" required="required">
+                        <option value="0">Mời chọn </option>
+                        <option value="1">Tạm ứng cho nhân viên</option>
+                        <option value="2">Gửi tiền vào ngân hàng</option>
+                        <option value="3">Chi khác</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 reason_other_div" style="display: none; padding-right: 0px;  padding-left: 30px">
+                    <label for="">Lí do chi khác</label>
+                    <input name="reason_other" type="text" class="form-control" id="reason_other" >
+                </div>
             </div>
-            
             <div class="portlet-body col-md-6">
                 <label for="rfrm-note" style="top: 0;margin-bottom: 0; font-size: 14px; color: #888888;  opacity: 1;">File chứng từ đính kèm (nếu có)</label>
                 <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -52,7 +62,7 @@
                 <label for="">Loại tiền</label>
                 <select name="money" id="money" class="form-control" required="required">
                     @foreach($money as $value)
-                    <option value="{{$value->id}}"> {{$value->name}} </option>
+                    <option value="{{$value->name}}"> {{$value->name}} </option>
                     @endforeach
                 </select>
             </div>
@@ -89,7 +99,7 @@
                             <input type="text" name="content_1" id="" class="form-control">
                         </td>
                         <td>
-                            <select name="debit_1" class="form-control" required="required">
+                            <select name="debit_1" class="form-control">
                                 <option value=""> </option>
                                 @foreach($finance_accounts as $value)
                                 <option value="{{$value->code}}"> {{$value->code}} - {{$value->name}} </option>
@@ -97,7 +107,7 @@
                             </select>
                         </td>
                         <td>
-                            <select name="credit_1" class="form-control" required="required">
+                            <select name="credit_1" class="form-control">
                                 <option value=""> </option>
                                 @foreach($finance_accounts as $value)
                                 <option value="{{$value->code}}"> {{$value->code}} - {{$value->name}} </option>
@@ -105,7 +115,7 @@
                             </select>
                         </td>
                         <td>
-                            <select name="bankaccount_1" class="form-control" required="required">
+                            <select name="bankaccount_1" class="form-control">
                                 <option value=""> </option>
                                 @foreach($bank_accounts as $value)
                                 <option value="{{$value->id}}"> {{$value->bank_account}} - {{$value->branch_bank}} </option>

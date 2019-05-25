@@ -1,25 +1,11 @@
 <div class="modal-header ">
     <center>
-        <h4 class="modal-title green">PHIẾU THU</h4>
+        <h4 class="modal-title green">GIẤY BÁO CÓ</h4>
     </center>
 </div>
-<form action="" method="POST" data-path="{{ route('cash-receipt-voucher.store') }}" role="form" enctype="multipart/form-data" id="add_receipt_voucher_form" class="row" >
+<form action="" method="POST" data-path="{{ route('credit-note.store') }}" role="form" enctype="multipart/form-data" id="add_credit_note_form" class="row" >
     <div class="modal-body">
         <div class="col-md-10 row">
-            <div class="form-group col-md-6">
-                <label for="">Loại đối tượng</label>
-                <select name="object_type" id="object_type" class="form-control" required="required">
-                    <option value="0">Mời chọn </option>
-                    <option value="1">Nhân viên</option>
-                    <option value="2">Khách hàng</option>
-                    <option value="3">Nhà cung cấp</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="">Tên đối tượng</label>
-                <select name="object" id="object" class="form-control" required="required" disabled="true">
-                </select>
-            </div>
             <div class="form-group col-md-6">
                 <label for="">Người nộp</label>
                 <input name="name_payer" type="text" class="form-control" id="name_payer" >
@@ -32,7 +18,15 @@
                 <label for="">Lí do nộp</label>
                 <input name="reason" type="text" class="form-control" id="reason" >
             </div>
-            
+            <div class="form-group col-md-12">
+                <label for="">Nộp vào Tài khoản</label>
+                <select name="bank_account" id="bank_account" class="form-control" required="required">
+                    <option value="0">Mời chọn </option>
+                    @foreach($bank_accounts as $value)
+                        <option value="{{$value->id}}"> {{$value->bank_account}} - {{$value->branch_bank}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="portlet-body col-md-6">
                 <label for="rfrm-note" style="top: 0;margin-bottom: 0; font-size: 14px; color: #888888;  opacity: 1;">File chứng từ đính kèm (nếu có)</label>
                 <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -52,7 +46,7 @@
                 <label for="">Loại tiền</label>
                 <select name="money" id="money" class="form-control" required="required">
                     @foreach($money as $value)
-                    <option value="{{$value->id}}"> {{$value->name}} </option>
+                    <option value="{{$value->name}}"> {{$value->name}} </option>
                     @endforeach
                 </select>
             </div>
@@ -79,7 +73,6 @@
                         <th>Diễn giải</th>
                         <th>TK Nợ</th>
                         <th>TK Có</th>
-                        <th>TK Ngân hàng</th>
                         <th>Số tiền</th>
                     </tr>
                 </thead>
@@ -89,26 +82,18 @@
                             <input type="text" name="content_1" id="" class="form-control">
                         </td>
                         <td>
-                            <select name="debit_1" class="form-control" required="required">
+                            <select name="debit_1" class="form-control">
                                 <option value=""> </option>
                                 @foreach($finance_accounts as $value)
-                                <option value="{{$value->code}}"> {{$value->code}} - {{$value->name}} </option>
+                                <option value="{{$value->id}}"> {{$value->code}} - {{$value->name}} </option>
                                 @endforeach
                             </select>
                         </td>
                         <td>
-                            <select name="credit_1" class="form-control" required="required">
+                            <select name="credit_1" class="form-control">
                                 <option value=""> </option>
                                 @foreach($finance_accounts as $value)
-                                <option value="{{$value->code}}"> {{$value->code}} - {{$value->name}} </option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select name="bankaccount_1" class="form-control" required="required">
-                                <option value=""> </option>
-                                @foreach($bank_accounts as $value)
-                                <option value="{{$value->id}}"> {{$value->bank_account}} - {{$value->branch_bank}} </option>
+                                <option value="{{$value->id}}"> {{$value->code}} - {{$value->name}} </option>
                                 @endforeach
                             </select>
                         </td>
@@ -124,7 +109,7 @@
                             <select name="debit_2" class="form-control" >
                                 <option value=""> </option>
                                 @foreach($finance_accounts as $value)
-                                <option value="{{$value->code}}"> {{$value->code}} - {{$value->name}} </option>
+                                <option value="{{$value->id}}"> {{$value->code}} - {{$value->name}} </option>
                                 @endforeach
                             </select>
                         </td>
@@ -132,15 +117,7 @@
                             <select name="credit_2" class="form-control" >
                                 <option value=""> </option>
                                 @foreach($finance_accounts as $value)
-                                <option value="{{$value->code}}"> {{$value->code}} - {{$value->name}} </option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select name="bankaccount_2" class="form-control" >
-                                <option value=""> </option>
-                                @foreach($bank_accounts as $value)
-                                <option value="{{$value->id}}"> {{$value->bank_account}} - {{$value->branch_bank}} </option>
+                                <option value="{{$value->id}}"> {{$value->code}} - {{$value->name}} </option>
                                 @endforeach
                             </select>
                         </td>

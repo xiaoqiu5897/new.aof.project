@@ -84,32 +84,33 @@
         <div class="caption" style="font-size: 14px">
             <i class="fa fa-home" aria-hidden="true"></i>
             <a href="">  Trang chủ </a>
-            &nbsp;/&nbsp; Phiếu thu
+            &nbsp;/&nbsp; Giấy báo có 
         </div>
     </div>
     <div class="portlet-body">
         <br>
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách phiếu thu</a></li>
+            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách giấy báo có </a></li>
         </ul>
         <div class="tab-content">
             <div id="new-students" class="tab-pane fade in active">
                 <div class="row">
                     <div class="col-xs-12">
                         <br>
-                        <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('cash-receipt-voucher.create') }}" style="background: #32c5d2">
-                            <i class="fa fa-plus"></i> Tạo phiếu thu
+                        <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('credit-note.create') }}" style="background: #32c5d2">
+                            <i class="fa fa-plus"></i> Tạo giấy báo có
                         </button>
                     </div>
                 </div>
                 <br>
-                <table class="table table-striped table-bordered table-hover" id="receipt_voucher_table">
+                <table class="table table-striped table-bordered table-hover" id="credit_note">
                     <thead>
                         <tr>
                             <th class="stl-column color-column">STT</th>
                             <th class="stl-column color-column">Mã phiếu</th>
-                            <th class="stl-column color-column">Người thu</th>
                             <th class="stl-column color-column">Người nộp</th>
+                            <th class="stl-column color-column">Nộp vào Tài khoản</th>
+                            <th class="stl-column color-column">Ngân hàng</th>
                             <th class="stl-column color-column">Số tiền</th>
                             <th class="stl-column color-column">Lí do</th>
                             <th class="stl-column color-column">Ngày chứng từ</th>
@@ -137,19 +138,20 @@
 </script>
 <script type="text/javascript" src="{{mix('build/js/global.js')}}"></script>
 <script>
-    $('#receipt_voucher_table').DataTable({
+    $('#credit_note').DataTable({
         processing: true,
         serverSide: true,
         ordering:   false,
         pageLength: 25,
-        ajax: '{!! route('get-list-cash-receipt-voucher') !!}',
+        ajax: '{!! route('get-list-credit-note') !!}',
         pageLength: 30,
         lengthMenu: [[30, 50, 100, 200, 500], [30, 50, 100, 200, 500]],
         columns: [
         {data: 'DT_RowIndex', className:'stt'},
         {data: 'code', name: 'code'},
-        {data: 'object_name', name: 'object_name'},
         {data: 'name_payer', name: 'name_payer'},
+        {data: 'bank_account', name: 'bank_account'},
+        {data: 'bank', name: 'bank'},
         {data: 'total_money', name: 'total_money'},
         {data: 'reason', name: 'reason'},
         {data: 'created_at', name: 'created_at'},
@@ -188,28 +190,8 @@
         });
     });
 </script>
-<script type="text/javascript">
-    $(document).on('change', '#object_type', function () {
-        $('#object').html('')
-        $.ajax({
-            type: 'get',
-            url: '/get-group-object',
-            data: {
-                type: $(this).val()
-            },
-            success: function (response) {
-                $('#object').attr('disabled', false);
-                $.each(response, function(i, item) {
-                    $('#object').append('<option value="'+ item.id +'">' +item.code+ ' - ' + item.name +'</option>')
-                })
-            }
-        })
-    })
-
-    
-</script>
 <script>
-    $(document).on('submit', '#add_receipt_voucher_form', function (event) {
+    $(document).on('submit', '#add_credit_note_form', function (event) {
         event.preventDefault();
         var path = $(this).attr('data-path');
         var formData = $(this).serialize();
@@ -220,7 +202,7 @@
             success: function (response) {
                 toastr.success('Tạo mới thành công');
                 $('#myModal').modal('hide');
-                $("#receipt_voucher_table").DataTable().ajax.reload();
+                $("#credit_note").DataTable().ajax.reload();
             }
         })
     });

@@ -90,15 +90,15 @@
     <div class="portlet-body">
         <br>
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách phiếu thu</a></li>
+            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách phiếu chi</a></li>
         </ul>
         <div class="tab-content">
             <div id="new-students" class="tab-pane fade in active">
                 <div class="row">
                     <div class="col-xs-12">
                         <br>
-                        <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('cash-receipt-voucher.create') }}" style="background: #32c5d2">
-                            <i class="fa fa-plus"></i> Tạo phiếu thu
+                        <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('cash-payment-voucher.create') }}" style="background: #32c5d2">
+                            <i class="fa fa-plus"></i> Tạo phiếu chi
                         </button>
                     </div>
                 </div>
@@ -108,8 +108,8 @@
                         <tr>
                             <th class="stl-column color-column">STT</th>
                             <th class="stl-column color-column">Mã phiếu</th>
-                            <th class="stl-column color-column">Người thu</th>
-                            <th class="stl-column color-column">Người nộp</th>
+                            <th class="stl-column color-column">Người chi</th>
+                            <th class="stl-column color-column">Người nhận</th>
                             <th class="stl-column color-column">Số tiền</th>
                             <th class="stl-column color-column">Lí do</th>
                             <th class="stl-column color-column">Ngày chứng từ</th>
@@ -142,7 +142,7 @@
         serverSide: true,
         ordering:   false,
         pageLength: 25,
-        ajax: '{!! route('get-list-cash-receipt-voucher') !!}',
+        ajax: '{!! route('get-list-cash-payment-voucher') !!}',
         pageLength: 30,
         lengthMenu: [[30, 50, 100, 200, 500], [30, 50, 100, 200, 500]],
         columns: [
@@ -189,6 +189,15 @@
     });
 </script>
 <script type="text/javascript">
+     $(document).on('change', '#reason', function () {
+        if ($(this).val() == 3) {
+            $('.reason_other_div').css('display', 'block');
+        } else {
+            $('.reason_other_div').css('display', 'none')
+        }
+    })
+</script>
+<script type="text/javascript">
     $(document).on('change', '#object_type', function () {
         $('#object').html('')
         $.ajax({
@@ -209,7 +218,7 @@
     
 </script>
 <script>
-    $(document).on('submit', '#add_receipt_voucher_form', function (event) {
+    $(document).on('submit', '#add_payment_voucher_form', function (event) {
         event.preventDefault();
         var path = $(this).attr('data-path');
         var formData = $(this).serialize();

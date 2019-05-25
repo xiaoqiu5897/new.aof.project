@@ -219,7 +219,7 @@
                                 </a>
                             </li>
                             <li class="nav-item {{ Request::is('cash-payment-voucher*') ? 'active open' : '' }}  ">
-                                <a href="" class="nav-link nav-toggle">
+                                <a href="{{ route('cash-payment-voucher.index') }}" class="nav-link nav-toggle">
                                     <i class="fa fa-money" aria-hidden="true"></i>
                                     <span class="title">Phiếu chi</span>
                                 </a>
@@ -228,25 +228,50 @@
 
                     </li>
 
-                    <li class="nav-item {{ Request::is('bonus*','salary_advance*','summary_salary_user*','time-keeping/statistical*','payment_vouchers*') ? 'active open' : '' }}  ">
-                        <a href="{{-- {{ route('acceptRechargeAllFee') }} --}} javascript:;" class="nav-link nav-toggle">
+                    <li class="nav-item {{ Request::is('credit-note*', 'standing-order*') ? 'active open' : '' }}  ">
+                        <a href="" class="nav-link nav-toggle">
                             <i class="fa fa-credit-card"></i>
                             <span class="title">Ngân hàng</span>
-                            <span class="arrow {{ Request::is('bonus*','salary_advance*','summary_salary_user*','payment_vouchers*') ? 'open' : '' }}"></span>
+                            <span class="arrow {{ Request::is('credit-note*', 'standing-order*') ? 'open' : '' }}"></span>
                         </a>
                         <ul class="sub-menu">
 
-                            <li class="nav-item {{ Request::is('summary_salary_user*') ? 'active open' : '' }}  ">
-                                <a href="" class="nav-link nav-toggle">
+                            <li class="nav-item {{ Request::is('credit-note*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('credit-note.index') }}" class="nav-link nav-toggle">
                                     <i class="fa fa-tasks"></i>
                                     <span class="title">Giấy báo có</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item {{ Request::is('payment_vouchers*') ? 'active open' : '' }}  ">
-                                <a href="" class="nav-link nav-toggle">
+                            <li class="nav-item {{ Request::is('standing-order*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('standing-order.index') }}" class="nav-link nav-toggle">
                                     <i class="fa fa-tasks"></i>
                                     <span class="title">Uỷ nhiệm chi</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item {{ Request::is('cash-book*', 'bank-deposit-book*') ? 'active open' : '' }}  ">
+                        <a href="" class="nav-link nav-toggle">
+                            <i class="fa fa-credit-card"></i>
+                            <span class="title">Sổ quỹ</span>
+                            <span class="arrow {{ Request::is('cash-book*', 'bank-deposit-book*') ? 'open' : '' }}"></span>
+                        </a>
+                        <ul class="sub-menu">
+
+                            <li class="nav-item {{ Request::is('cash-book*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('cash-book.index') }}" class="nav-link nav-toggle">
+                                    <i class="fa fa-tasks"></i>
+                                    <span class="title">Sổ quỹ tiền mặt</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item {{ Request::is('bank-deposit-book*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('bank-deposit-book.index') }}" class="nav-link nav-toggle">
+                                    <i class="fa fa-tasks"></i>
+                                    <span class="title">Sổ tiền gửi</span>
                                 </a>
                             </li>
 

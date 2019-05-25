@@ -84,21 +84,21 @@
         <div class="caption" style="font-size: 14px">
             <i class="fa fa-home" aria-hidden="true"></i>
             <a href="">  Trang chủ </a>
-            &nbsp;/&nbsp; Phiếu thu
+            &nbsp;/&nbsp; Uỷ nhiệm chi
         </div>
     </div>
     <div class="portlet-body">
         <br>
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách phiếu thu</a></li>
+            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách ủy nhiệm chi</a></li>
         </ul>
         <div class="tab-content">
             <div id="new-students" class="tab-pane fade in active">
                 <div class="row">
                     <div class="col-xs-12">
                         <br>
-                        <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('cash-receipt-voucher.create') }}" style="background: #32c5d2">
-                            <i class="fa fa-plus"></i> Tạo phiếu thu
+                        <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('standing-order.create') }}" style="background: #32c5d2">
+                            <i class="fa fa-plus"></i> Tạo ủy nhiệm chi
                         </button>
                     </div>
                 </div>
@@ -108,10 +108,11 @@
                         <tr>
                             <th class="stl-column color-column">STT</th>
                             <th class="stl-column color-column">Mã phiếu</th>
-                            <th class="stl-column color-column">Người thu</th>
-                            <th class="stl-column color-column">Người nộp</th>
+                            <th class="stl-column color-column">Tài khoản</th>
+                            <th class="stl-column color-column">Ngân hàng</th>
+                            <th class="stl-column color-column">Đối tượng nhận tiền</th>
                             <th class="stl-column color-column">Số tiền</th>
-                            <th class="stl-column color-column">Lí do</th>
+                            <th class="stl-column color-column">Nội dung</th>
                             <th class="stl-column color-column">Ngày chứng từ</th>
                             <th class="stl-column color-column">Ngày ghi sổ</th>
                             <th class="stl-column color-column">Chức năng</th>
@@ -142,13 +143,14 @@
         serverSide: true,
         ordering:   false,
         pageLength: 25,
-        ajax: '{!! route('get-list-cash-receipt-voucher') !!}',
+        ajax: '{!! route('get-list-standing-order') !!}',
         pageLength: 30,
         lengthMenu: [[30, 50, 100, 200, 500], [30, 50, 100, 200, 500]],
         columns: [
         {data: 'DT_RowIndex', className:'stt'},
         {data: 'code', name: 'code'},
-        {data: 'object_name', name: 'object_name'},
+        {data: 'bank_account', name: 'bank_account'},
+        {data: 'bank', name: 'bank'},
         {data: 'name_payer', name: 'name_payer'},
         {data: 'total_money', name: 'total_money'},
         {data: 'reason', name: 'reason'},
@@ -209,7 +211,7 @@
     
 </script>
 <script>
-    $(document).on('submit', '#add_receipt_voucher_form', function (event) {
+    $(document).on('submit', '#add_payment_voucher_form', function (event) {
         event.preventDefault();
         var path = $(this).attr('data-path');
         var formData = $(this).serialize();
