@@ -81,7 +81,6 @@ class RoleController extends Controller
                         ]);
                  } else {
                     $check= Role::where('name', $data['name'])->first();
-                    
                     if(empty($check)){
                         Role::create($data);
                     }else{
