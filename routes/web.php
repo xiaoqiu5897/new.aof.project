@@ -36,9 +36,14 @@ Route::group(['middleware' => 'auth'], function () {
 	//Sổ quỹ tiền mặt
 	Route::resource('cash-book', 'CashBookController');
 	Route::post('cash-book/filter', 'CashBookController@filter')->name('cash-book.filter');
+	Route::post('cash-book/print', 'CashBookController@print')->name('cash-book.print');
+	Route::get('cash-book/print/show', 'CashBookController@printShow')->name('cash-book.print-show');
 	//hết
 	//Sổ tiền gửi
 	Route::resource('bank-deposit-book', 'BankDepositBookController');
+	Route::post('bank-deposit-book/filter', 'BankDepositBookController@filter')->name('bank-deposit-book.filter');
+	Route::post('bank-deposit-book/print', 'BankDepositBookController@print')->name('bank-deposit-book.print');
+	Route::get('bank-deposit-book/print/show', 'BankDepositBookController@printShow')->name('bank-deposit-book.print-show');
 	//hết
 	//quyền hạn
 	Route::get('list-permission', ['as' => 'users.list-permission', 'uses' => 'PermissionController@getListPermission']);

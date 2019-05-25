@@ -147,21 +147,19 @@ class CashReceiptVoucherController extends Controller
         }
         
 
-        VoucherDetail::create([
+        $new_voucher_detail = VoucherDetail::create([
             'voucher_id' => $voucher->id,
             'content' => $request->content_1,
-            'debit_account'  => $request->debit_1,
-            'credit_account'  => $request->credit_1,
-            'amount_money'  => $request->amountmoney_1,
+            'amount_money'  => $request->amountmoney_1*$voucher->exchange_rate,
             'bank_account_id' => $request->bankaccount_1,
         ]);
 
+        $new_voucher_detail->debit_account = $request->debit_1;
+        $new_voucher_detail->credit_account = $request->credit_1;
+        $new_voucher_detail->save();
+
         $voucher_details = VoucherDetail::where('voucher_id', $voucher->id)->get();
-        if ($request->money != "VNĐ") {
-            $voucher->total_money = $voucher_details->sum('amount_money')*$voucher->exchange_rate;
-        } else {
-            $voucher->total_money = $voucher_details->sum('amount_money');
-        }
+        $voucher->total_money = $voucher_details->sum('amount_money');
         $voucher->save();
     }
 
