@@ -80,7 +80,7 @@ class RoleController extends Controller
                             'message' => 'Vai trò này đã có. Mời bạn thử lại!'
                         ]);
                  } else {
-                    $check= Role::withTrashed()->where('name', $data['name'])->first();
+                    $check= Role::where('name', $data['name'])->first();
                     if(empty($check)){
                         Role::create($data);
                     }else{
