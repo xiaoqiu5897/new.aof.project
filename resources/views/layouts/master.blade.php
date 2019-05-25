@@ -302,47 +302,59 @@
                     </li>
 
                     <li class="heading">
-                        <h3 class="uppercase">Nhân viên</h3>
+                        <h3 class="uppercase">Quản lý danh mục</h3>
                     </li>
 
                     <li class="nav-item {{ Request::is('users*') ? 'active open' : '' }}  ">
                         <a href="" class="nav-link nav-toggle">
 
                             <i class="fa fa-users" aria-hidden="true"></i>
-                            <span class="title">Quản lý nhân viên</span>
+                            <span class="title">Quản lý Nhân viên</span>
                         </a>
                     </li>
                     <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
                         <a href="" class="nav-link nav-toggle">
 
                             <i class="fa fa-id-card" aria-hidden="true"></i>
-                            <span class="title">Quản lý phòng ban</span>
+                            <span class="title">Quản lý Khách hàng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
+                        <a href="" class="nav-link nav-toggle">
+
+                            <i class="fa fa-id-card" aria-hidden="true"></i>
+                            <span class="title">Quản lý Nhà cung cấp</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
+                        <a href="" class="nav-link nav-toggle">
+
+                            <i class="fa fa-id-card" aria-hidden="true"></i>
+                            <span class="title">Quản lý Tiền tệ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
+                        <a href="" class="nav-link nav-toggle">
+
+                            <i class="fa fa-id-card" aria-hidden="true"></i>
+                            <span class="title">Quản lý Ngân hàng</span>
                         </a>
                     </li>
 
                     {{-- end --}}
 
                     {{-- STUDENT --}}
-
-                    <li class="heading">
-                        <h3 class="uppercase">Học viên</h3>
-                    </li>
-
-
-                    <li class="nav-item {{ Request::is('students') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
-                            <i class="fa fa-user"></i>
-                            <span class="title">Quản lý học viên</span>
-                        </a>
-                    </li>
-
-
-
                     <li class="heading">
                         <h3 class="uppercase">Quản trị hệ thống</h3>
                     </li>
 
-
+                    <li class="nav-item {{ Request::is('students') ? 'active open' : '' }}  ">
+                        <a href="" class="nav-link nav-toggle">
+                            <i class="fa fa-user"></i>
+                            <span class="title">Quản lý Người dùng</span>
+                        </a>
+                    </li>
+                    
                     <li class="nav-item {{ Request::is('role*') ? 'active open' : '' }}">
                         <a href="" class="nav-link nav-toggle">
 
