@@ -49,6 +49,30 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('bank-deposit-book/print', 'BankDepositBookController@print')->name('bank-deposit-book.print');
 	Route::get('bank-deposit-book/print/show', 'BankDepositBookController@printShow')->name('bank-deposit-book.print-show');
 	//hết
+	//Sổ cái
+	Route::resource('main-ledger', 'MainLedgerController');
+	Route::post('main-ledger/filter', 'MainLedgerController@filter')->name('main-ledger.filter');
+	Route::post('main-ledger/print', 'MainLedgerController@print')->name('main-ledger.print');
+	Route::get('main-ledger/print/show', 'MainLedgerController@printShow')->name('main-ledger.print-show');
+	//hết
+	//Sổ nhật ký thu tiền
+	Route::resource('diary-receipt', 'MainLedgerController');
+	Route::post('diary-receipt/filter', 'MainLedgerController@filter')->name('diary-receipt.filter');
+	Route::post('diary-receipt/print', 'MainLedgerController@print')->name('diary-receipt.print');
+	Route::get('diary-receipt/print/show', 'MainLedgerController@printShow')->name('diary-receipt.print-show');
+	//hết
+	//Sổ cái Sổ nhật ký chi tiền
+	Route::resource('diary-payment', 'MainLedgerController');
+	Route::post('diary-payment/filter', 'MainLedgerController@filter')->name('diary-payment.filter');
+	Route::post('diary-payment/print', 'MainLedgerController@print')->name('diary-payment.print');
+	Route::get('diary-payment/print/show', 'MainLedgerController@printShow')->name('diary-payment.print-show');
+	//hết
+	//Sổ báo cáo tồn quỹ
+	Route::resource('cash-inventory', 'MainLedgerController');
+	Route::post('cash-inventory/filter', 'MainLedgerController@filter')->name('cash-inventory.filter');
+	Route::post('cash-inventory/print', 'MainLedgerController@print')->name('cash-inventory.print');
+	Route::get('cash-inventory/print/show', 'MainLedgerController@printShow')->name('cash-inventory.print-show');
+	//hết
 	//quyền hạn
 	Route::get('list-permission', ['as' => 'users.list-permission', 'uses' => 'PermissionController@getListPermission']);
 	Route::resource('permissions', 'PermissionController');

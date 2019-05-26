@@ -84,13 +84,13 @@
         <div class="caption" style="font-size: 14px">
             <i class="fa fa-home" aria-hidden="true"></i>
             <a href="">  Trang chủ </a>
-            &nbsp;/&nbsp; Uỷ nhiệm chi
+            &nbsp;/&nbsp; Giấy báo nợ
         </div>
     </div>
     <div class="portlet-body">
         <br>
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách ủy nhiệm chi</a></li>
+            <li class="active"><a data-toggle="tab" href="#new-students">Danh sách giấy báo nợ</a></li>
         </ul>
         <div class="tab-content">
             <div id="new-students" class="tab-pane fade in active">
@@ -98,7 +98,7 @@
                     <div class="col-xs-12">
                         <br>
                         <button type="button" class="btn btn-sm green btn-create-obj" data-create-path="{{ route('standing-order.create') }}" style="background: #32c5d2">
-                            <i class="fa fa-plus"></i> Tạo ủy nhiệm chi
+                            <i class="fa fa-plus"></i> Tạo giấy báo nợ
                         </button>
                     </div>
                 </div>
