@@ -306,22 +306,22 @@
                         <h3 class="uppercase">Quản lý danh mục</h3>
                     </li>
 
-                    <li class="nav-item {{ Request::is('users*') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
+                    <li class="nav-item {{ Request::is('employee*') ? 'active open' : '' }}  ">
+                        <a href="{{route('employees.index')}}?type=1" class="nav-link nav-toggle">
 
                             <i class="fa fa-users" aria-hidden="true"></i>
                             <span class="title">Quản lý Nhân viên</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
+                    <li class="nav-item {{ Request::is('customer*') ? 'active open' : '' }}  ">
+                        <a href="{{route('customers.index')}}?type=2" class="nav-link nav-toggle">
 
                             <i class="fa fa-id-card" aria-hidden="true"></i>
                             <span class="title">Quản lý Khách hàng</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
+                    <li class="nav-item {{ Request::is('suppliers*') ? 'active open' : '' }}  ">
+                        <a href="{{route('suppliers.index')}}?type=3" class="nav-link nav-toggle">
 
                             <i class="fa fa-id-card" aria-hidden="true"></i>
                             <span class="title">Quản lý Nhà cung cấp</span>
@@ -348,29 +348,30 @@
                     <li class="heading">
                         <h3 class="uppercase">Quản trị hệ thống</h3>
                     </li>
-
+                    @if(Entrust::can(["users-manager"]))
                     <li class="nav-item {{ Request::is('users*') ? 'active open' : '' }}  ">
                         <a href="{{route('users.index')}}" class="nav-link nav-toggle">
                             <i class="fa fa-user"></i>
                             <span class="title">Quản lý Người dùng</span>
                         </a>
                     </li>
-                    
+                    @endif
+                    @if(Entrust::can(["roles-manager"]))
                     <li class="nav-item {{ Request::is('role*') ? 'active open' : '' }}">
                         <a href="{{route('roles.index')}}" class="nav-link nav-toggle">
                             <i class="icon-lock ion" aria-hidden="true"></i>
                             <span class="title">Vai trò</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if(Entrust::can(["permissions-manager"]))
                     <li class="nav-item {{ Request::is('permission*') ? 'active open' : '' }}">
                         <a href="{{route('permissions.index')}}" class="nav-link nav-toggle">
                             <i class="icon-shield ion" aria-hidden="true"></i>
                             <span class="title">Quyền hạn</span>
                         </a>
                     </li>
-
-
+                    @endif
                 </ul>
 
                 <!-- END SIDEBAR -->

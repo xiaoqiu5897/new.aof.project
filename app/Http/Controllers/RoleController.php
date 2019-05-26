@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -18,6 +17,8 @@ class RoleController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('permission:roles-manager')->only(['index','update','store','destroy','getListPermission','getPermissions','getListRole','postPermissions','show']);
+        $this->middleware('permission:roles-detail')->only('edit');
     }
     /**
      * Display a listing of the resource.
@@ -325,7 +326,7 @@ class RoleController extends Controller
             ->addColumn('action', function ($role) {
 
                 $string = '';
-                //if (Entrust::can(["roles-manager"])) {
+                if (Entrust::can(["roles-manager"])) {
                     $string = $string .' <a href="roles/' . $role->name .'/permissions" class="btn btn-xs blue" data-tooltip="tooltip" title="Quyền hạn">
                             <i class="icon-shield ion" aria-hidden="true"></i> 
                         </a>';
@@ -337,7 +338,7 @@ class RoleController extends Controller
                     $string = $string . '<a href="javascript:;" type="button" data-id="'. $role->id .'" class="btn btn-xs red btn-delete" data-tooltip="tooltip" title="Xóa">
                             <i class="fa fa-trash-o"></i>
                           </a>';
-                //}
+                }
                 return $string;
             })
             ->make(true);

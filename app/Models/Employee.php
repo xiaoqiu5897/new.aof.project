@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class GroupObject extends Authenticatable
+class Employee extends Authenticatable
 {
     use Notifiable, EntrustUserTrait;
 
@@ -15,6 +15,7 @@ class GroupObject extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'group_objects';
 
     protected $fillable = [
         'name', 'email', 'password', 'code', 'type', 'address', 'mobile', 'tax_code', 'bank_account', 'bank_id'
