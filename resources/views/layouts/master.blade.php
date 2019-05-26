@@ -204,6 +204,12 @@
                     <li class="heading">
                         <h3 class="uppercase">Quản lý tài chính</h3>
                     </li>
+                    <li class="nav-item {{ Request::is('finance_account*') ? 'active open' : '' }}  ">
+                        <a href="{{ route('finance_account.index') }}" class="nav-link nav-toggle">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <span class="title">Quản lý kế toán</span>
+                        </a>
+                    </li>
                     <li class="nav-item {{ Request::is('cash-receipt-voucher*','cash-payment-voucher*') ? 'active open' : '' }}  ">
 
                         <a href="" class="nav-link nav-toggle">
