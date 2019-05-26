@@ -91,4 +91,16 @@ Route::group(['middleware' => 'auth'], function () {
 	//nhà cung cấp
 	Route::resource('suppliers', 'EmployeeController');
 	//hết
+	//tiền tệ
+	Route::resource('moneys', 'MoneyController');
+	Route::get('list-money', ['as' => 'moneys.list-money', 'uses' => 'MoneyController@getListMoney']);
+	//hết
+	//ngân hàng
+	Route::resource('banks', 'BankController');
+	Route::get('list-bank', ['as' => 'banks.list-bank', 'uses' => 'BankController@getListBank']);
+	//hết
+	//tài khoản ngân hàng
+	Route::resource('bank-accounts', 'BankAccountController');
+	Route::get('list-bank-account', ['as' => 'bank-accounts.list-bank-account', 'uses' => 'BankAccountController@getListBankAccount']);
+	//hết
 });
