@@ -23,7 +23,6 @@
 		height: 100%;
 	}
 </style>
-
 @endsection
 
 @section('contents')
@@ -471,21 +470,38 @@
 					$('.account_finance').html(response.account_finance.code + ' - ' + response.account_finance.name)
 					var surplus_debit = response.account_finance.surplus_debit;
 					var money = surplus_debit;
+					var sum_debit = 0;
+					var sum_credit = 0;
 					$('.voucher-detail-table').append(`
 						<tr>
-						<td width="75px"></td>
-						<td width="75px"></td>
+						<th width="75px"></th>
+						<th width="75px"></th>
 						<td></td>
 						<td></td>
-						<td>- Số tồn đầu kỳ</td>
+						<th class="content-detail">- Số tồn đầu kỳ</th>
+						<td width="50px"></td>
 						<td></td>
 						<td></td>
-						<td align="right">` + format_number(surplus_debit) + `</td>
+						<th align="right">` + format_number(surplus_debit) + `</th>
+						<th></th>
+						</tr>`)
+					$('.voucher-detail-table').append(`
+						<tr>
+						<th width="75px"></th>
+						<th width="75px"></th>
 						<td></td>
+						<td></td>
+						<th class="content-detail">- Số phát sinh trong kỳ</th>
+						<td width="50px"></td>
+						<td></td>
+						<td></td>
+						<th></th>
+						<th></th>
 						</tr>`)
 					$.each(response.voucher_details, function(i, item) {
-						if (item.type == 1) { 
+						if (item.debit_account == account_finance) { 
 							money += item.amount_money
+							sum_debit += item.amount_money
 							$('.voucher-detail-table').append(`
 								<tr>
 								<td>` + item.accounting_date1 + `</td>
@@ -493,14 +509,16 @@
 								<td align="center">` + item.code + `</td>
 								<td align="center"></td>
 								<td>` + item.content + `</td>
+								<td width="50px">` + item.credit_account + `</td>
 								<td align="right">` + format_number(item.amount_money) + `</td>
 								<td></td>
 								<td align="right">` + format_number(money) + `</td>
 								<td></td>
 								</tr>`)
 						}
-						if (item.type == 2) {
+						if (item.credit_account == account_finance) {
 							money -= item.amount_money
+							sum_credit += item.amount_money
 							$('.voucher-detail-table').append(`
 								<tr>
 								<td>` + item.accounting_date1 + `</td>
@@ -508,6 +526,7 @@
 								<td align="center"></td>
 								<td align="center">` + item.code + `</td>
 								<td>` + item.content + `</td>
+								<td width="50px">` + item.debit_account + `</td>
 								<td></td>
 								<td align="right">` + format_number(item.amount_money) + `</td>
 								<td align="right">` + format_number(money) + `</td>
@@ -516,8 +535,33 @@
 						}
 					})
 
+					$('.voucher-detail-table').append(`
+						<tr>
+						<th width="75px"></th>
+						<th width="75px"></th>
+						<td></td>
+						<td></td>
+						<th class="content-detail">- Cộng số phát sinh trong kỳ</th>
+						<td width="50px"></td>
+						<td>` + format_number(sum_debit) + `</td>
+						<td>` + format_number(sum_credit) + `</td>
+						<th></th>
+						<th></th>
+						</tr>`)
+					$('.voucher-detail-table').append(`
+						<tr>
+						<th width="75px"></th>
+						<th width="75px"></th>
+						<td></td>
+						<td></td>
+						<th class="content-detail">- Số dư cuối kỳ</th>
+						<td width="50px"></td>
+						<td></td>
+						<td></td>
+						<th>` + format_number(surplus_debit + sum_debit - sum_credit) + `</td>
+						<th></th>
+						</tr>`)
 				})
-
 			}
 		})
 	})

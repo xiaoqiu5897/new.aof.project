@@ -30,17 +30,19 @@
     #print_bill_123{
         font-size: 15px;
     }
-    th {
+    .cash-book-thead th {
         text-align: center;
     }
     .cash-book-table td, .cash-book-table th, .cash-book-table table {
         border: 1.5px solid #959595!important;
     }
 </style>
+
+
 <div class="modal-body">
-    <div id="print_bill_123">
+    <div id="print_bank_deposit_book_123">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-6 name-company">
                 <div>
                     <div>
                         <span>Đơn vị : </span><span>Công ty Cổ Phần Giáo Dục Và Công Nghệ Số Zent</span>
@@ -52,7 +54,7 @@
             </div>
             <div class="col-xs-6">
                 <div class="pull-right text-center">
-                    <div><span>Mẫu số : S07  - DN</span></div>
+                    <div><span>Mẫu số : S08  - DN</span></div>
                     <div>
                         <span>(Ban hành theo Thông tư số: 200/2014/TT-BTC</span>
                         <br>
@@ -62,39 +64,36 @@
             </div>
             <div class="col-xs-12">
                 <div class="text-center">
-                    <h3 class="uppercase bold">SỔ QUỸ TIỀN MẶT</h3>
+                    <h3 class="uppercase bold">SỔ TIỀN GỬI NGÂN HÀNG</h3>
                     <span class="reporting_period">
-                        {{-- {{ $voucher->created_at->format('\N\g\à\y\ d') }}
-                        {{ $voucher->created_at->format('\T\h\á\n\g\ n') }}
-                        {{ $voucher->created_at->format('\N\ă\m\ Y') }} --}}
                     </span>
                 </div>
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12 so">
                 <div class="text-right">
                     <span>Số : ......................</span>
                 </div>
             </div>
-            <div class="col-xs-12" style="margin-bottom: 20px">
+            <div class="col-xs-12 account" style="margin-bottom: 20px">
                 <span class="title_hide_dashed">Tài khoản : </span>
                 <span class="account_finance"></span>
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12 content-table">
                 <table class="table table-bordered cash-book-table" >
-                    <thead>
+                    <thead class="cash-book-thead">
                         <tr>
                             <th scope="col" rowspan="2">Ngày, tháng ghi sổ</th>
-                            <th scope="col" rowspan="2">Ngày, tháng chứng từ</th>
-                            <th scope="col" colspan="2">Số hiệu chứng từ</th>
+                            <th scope="col" colspan="2">Chứng từ</th>
                             <th scope="col" rowspan="2">Diễn giải</th>
+                            <th scope="col" rowspan="2">Tài khoản đối ứng</th>
                             <th scope="col" colspan="3">Số tiền</th>
                             <th scope="col" rowspan="2">Ghi chú</th>
                         </tr>
                         <tr>
-                            <th scope="col">Thu</th>
-                            <th scope="col">Chi</th>
-                            <th scope="col">Thu</th>
-                            <th scope="col">Chi</th>
+                            <th scope="col">Số hiệu</th>
+                            <th scope="col">Ngày, tháng</th>
+                            <th scope="col">Thu (gửi vào)</th>
+                            <th scope="col">Chi (rút ra)</th>
                             <th scope="col">Tồn</th>
                         </tr>
                         <tr>
@@ -106,7 +105,7 @@
                             <th scope="col">1</th>
                             <th scope="col">2</th>
                             <th scope="col">3</th>
-                            <th scope="col">G</th>
+                            <th scope="col">F</th>
                         </tr>
                     </thead>
                     <tbody class="voucher-detail-table">
@@ -115,24 +114,24 @@
             </div>
             <br>
             <div class="col-xs-8"></div>
-            <div class="col-xs-4" style="height: 50px;">
+            <div class="col-xs-4 date" style="height: 50px;">
                 <span>Ngày .......... Tháng .......... Năm ..........</span>
             </div>
             <div class="col-xs-12" style="height: 100px">
-                <div class="row">
-                    <div class="col-xs-4">
+                <div class="row sign-div">
+                    <div class="col-xs-4 sign">
                         <div class="text-center">
                             <div><span>Thủ quỹ</span></div>
                             <div><span>(Ký, họ tên)</span></div>
                         </div>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 sign">
                         <div class="text-center">
                             <div><span>Kế toán trưởng</span></div>
                             <div><span>(Ký, họ tên)</span></div>
                         </div>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 sign">
                         <div class="text-center">
                             <div><span>Giám đốc</span></div>
                             <div><span>(Ký, họ tên)</span></div>
@@ -142,13 +141,12 @@
             </div>
             <div class="clearfix clearfix-50"></div>
         </div>
-        <hr>
         <div class="clearfix clearfix-15"></div>
         <div class="row no-print">
             <div class="col-xs-12">
                 <center>
-                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-sm btn-default print-link no-print green" onclick="exportPrint();"><i class="fa fa-print"></i> Print</button>
+                    <button type="button" class="btn btn-sm btn-danger btn-close" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-sm btn-default print-link no-print green" id="print-bank-deposit"><i class="fa fa-print"></i> Print</button>
                 </center>
             </div>
         </div>
@@ -157,7 +155,107 @@
 
 
 <script>
-    function exportPrint() {
-        $('#print_bill_123').print();
-    }
+    $('#print-bank-deposit').click(function () {
+        var pageTitle = 'Page Title';
+        var divToPrint = document.getElementById("print_bank_deposit_book_123");
+        stylesheet = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css';
+        win = window.open('', 'Print', 'width=700,height=500');
+        win.document.write(
+            `<html lang="en">
+            <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>` + pageTitle + `</title>
+            <link rel="stylesheet" media="print" href="` + stylesheet + `"/>
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+            <style>
+            .hr_dotted{
+                margin: 30px 0 0 0;
+                border:none;
+                border-top:1px dotted #ccc;
+                color:#fff;
+                background-color:#fff;
+            }
+            .parent_border_dashed{
+                border-bottom: 1px dotted #000;
+            }
+            .title_hide_dashed{
+                background: #fff;
+                padding: 10px 10px 10px 0px;
+            }
+            .mg-bot-20{
+                margin-bottom: 20px;
+            }
+            .clearfix-50{
+                height: 50px;
+                clear: both;
+            }
+            .clearfix-15{
+                height: 15px;
+                clear: both;
+            }
+            hr{
+                margin: 0;
+            }
+            #print_bank_deposit_book_123{
+                font-size: 15px;
+                font-family: monospace;
+            }
+            .cash-book-thead th{
+                text-align: center;
+            }
+            .cash-book-table td, .cash-book-table th, .cash-book-table table {
+                border: 1.5px solid #959595!important;
+            }
+            .name-company{
+                width: 50%;
+                float: left;
+            }
+            h3 {
+                text-align: center;
+            }
+            .so {
+                width: 50%;
+                float: rigth;
+            }
+            .account {
+                width: 50%;
+                float: left;
+            }
+            .content-table{
+                clear:both;
+            }
+            .cash-book-table{
+                margin: auto;
+                border-collapse: collapse;
+            }
+            .date {
+                float: right;
+                margin-right: 100px;
+                clear: both;
+            }
+            .sign{
+                width: 33%;
+                float: left;
+            }
+            .content-detail{
+                width: 300px;
+            }
+            .btn-close, #print-bank-deposit{
+                display: none;
+            }
+            .sign-div{
+                margin: auto;
+            }
+            .code-voucher {
+                width: 150px;
+            }
+            </style>
+            </head><body>` + divToPrint.outerHTML + `</body></html>`);
+        win.document.close();
+        win.print();
+        win.close();
+        return false;
+    });
 </script>

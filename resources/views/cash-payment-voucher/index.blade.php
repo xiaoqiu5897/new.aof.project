@@ -67,6 +67,7 @@
         display: none;
     }
 </style>
+
 @endsection
 
 @section('contents')
@@ -189,13 +190,13 @@
     });
 </script>
 <script type="text/javascript">
-     $(document).on('change', '#reason', function () {
-        if ($(this).val() == 3) {
-            $('.reason_other_div').css('display', 'block');
-        } else {
-            $('.reason_other_div').css('display', 'none')
-        }
-    })
+ $(document).on('change', '#reason', function () {
+    if ($(this).val() == 3) {
+        $('.reason_other_div').css('display', 'block');
+    } else {
+        $('.reason_other_div').css('display', 'none')
+    }
+})
 </script>
 <script type="text/javascript">
     $(document).on('change', '#object_type', function () {
@@ -232,6 +233,38 @@
                 $("#receipt_voucher_table").DataTable().ajax.reload();
             }
         })
+    });
+</script>
+<script type="text/javascript">
+    $(document).on('click','.btn-note-obj',function () {
+        var url = $(this).attr('data-show-path');
+        var id = $(this).attr('data-id');
+        swal({
+            title: "Bạn có chắc chắn ghi sổ chứng từ này?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    success: function(res){
+                        $("#lar_table").DataTable().ajax.reload();
+                        $('#edit-payment-' + id + '').css('display', 'none');
+                        $('#note-payment-' + id + '').css('display', 'none');
+                        $('#delete-payment-' + id + '').css('display', 'none');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        toastr.error(thrownError);
+                    }
+
+
+                })
+            }
+        });
+
     });
 </script>
 <script type="text/javascript">

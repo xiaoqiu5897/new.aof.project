@@ -34,13 +34,13 @@ class CashPaymentVoucherController extends Controller
                 $txt = '';
 
                 $txt .= '<a class="btn btn-xs btn-show-obj" data-tooltip="tooltip" title="Xem chi tiết" data-show-path="'.route('cash-payment-voucher.show',$payment_voucher->id).'" style="background: #dc58eb; color: white"> <i class="fa fa-eye" aria-hidden="true"></i></a>';
+                if ($payment_voucher->status != 1) {
+                    $txt .= '<a class="btn btn-xs btn-warning btn-edit-obj" id="edit-payment-'.$payment_voucher->id.'" data-tooltip="tooltip" title="Chỉnh sửa" data-edit-path=""> <i class="fa fa-edit" aria-hidden="true"></i></a>';
 
-                $txt .= '<a class="btn btn-xs btn-warning btn-edit-obj" data-tooltip="tooltip" title="Chỉnh sửa" data-edit-path=""> <i class="fa fa-edit" aria-hidden="true"></i></a>';
+                    $txt .= '<a class="btn btn-xs btn-note-obj" id="note-payment-'.$payment_voucher->id.'" data-id="'.$payment_voucher->id.'" data-tooltip="tooltip" title="Ghi sổ" data-show-path="'.route('cash-payment-voucher.note',$payment_voucher->id).'" style="background: #71f847; color: white"> <i class="fa fa-book" aria-hidden="true"></i></a>';
 
-                $txt .= '<a class="btn btn-xs btn-show-obj" data-tooltip="tooltip" title="Ghi sổ" data-show-path="" style="background: #71f847; color: white"> <i class="fa fa-book" aria-hidden="true"></i></a>';
-
-                $txt .= '<a class="btn btn-xs btn-danger btn-delete-obj" data-tooltip="tooltip" data-delete-id="" title="Xóa"> <i class="fa fa-trash" aria-hidden="true"></i></a>';
-
+                    $txt .= '<a class="btn btn-xs btn-danger btn-delete-obj" id="delete-payment-'.$payment_voucher->id.'" data-tooltip="tooltip" data-delete-id="" title="Xóa"> <i class="fa fa-trash" aria-hidden="true"></i></a>';
+                }
                 return $txt;
             })
             ->editColumn('code', function ($payment_voucher){
@@ -270,5 +270,12 @@ class CashPaymentVoucherController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function note($id)
+    {
+        $voucher = Voucher::find($id);
+        $voucher->status = 1;
+        $voucher->save();
     }
 }
