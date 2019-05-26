@@ -103,4 +103,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('bank-accounts', 'BankAccountController');
 	Route::get('list-bank-account', ['as' => 'bank-accounts.list-bank-account', 'uses' => 'BankAccountController@getListBankAccount']);
 	//hết
+	//quản lý kế toán
+	Route::resource('finance_account', 'FinanceAccountController');
+	Route::get('get-list-finance-account', 'FinanceAccountController@getList')->name('get-list-finance-account');
+	Route::get('find-finance-account/{id}', 'FinanceAccountController@find')->name('find-finance-account');
+	Route::get('create-finance-account', 'FinanceAccountController@create')->name('create-finance-account');
+	//hết
 });
