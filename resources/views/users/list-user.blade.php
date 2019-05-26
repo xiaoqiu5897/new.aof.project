@@ -212,11 +212,11 @@
             <div class="modal-body">
                 <form id="formCreateUser" method="POST" role="form">
                     <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name_new" name="name">
                         <label for="name">Tên</label>
                     </div>
                     <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                        <input type="text" class="form-control" id="email" name="email">
+                        <input type="text" class="form-control" id="email_new" name="email">
                         <label for="email">Email</label>
                     </div>
                 </form>
@@ -224,7 +224,7 @@
                 <div class="modal-footer">
                     <center>
                         <button type="button" class="btn btn-sm btn-primary red" data-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-sm btn-success" form="formCreateUser">Thêm mới</button>
+                        <button type="submit" class="btn btn-sm btn-success" form="formCreateUser">Thêm mới</button>
                     </center>
                 </div>
             </div>
@@ -253,28 +253,8 @@
                         </tr>
 
                         <tr>
-                            <td>Số điện thoại</td>
-                            <td id="info_user_mobile"></td>
-                        </tr>
-
-                        <tr>
                             <td>Email</td>
                             <td id="info_user_email"></td>
-                        </tr>
-
-                        <tr>
-                            <td>Địa chỉ</td>
-                            <td id="info_user_address"></td>
-                        </tr>
-
-                        <tr>
-                            <td>Nơi làm việc</td>
-                            <td id="info_user_workPlace"></td>
-                        </tr>
-
-                        <tr>
-                            <td>Học vấn</td>
-                            <td id="info_user_education"></td>
                         </tr>
                     </thead>
                 </table>
@@ -297,9 +277,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-
                     <form id="frmEditUser" method="POST" role="form">
-
                         <div class="form-wizard">
                             <div class="form-body">
                                 <div class="tab-content">
@@ -307,114 +285,30 @@
                                         <div class="form-body col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-10 col-lg-offset-1">
                                             <input type="hidden" name="_method" value="" id="user_id">
                                             <div class="form-group form-md-line-input">
-                                             <input type="text" class="form-control" id="user_name" name="user_name">
-
-                                             <label for="name">Họ tên <span class="requireds"> (*)</span></label>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <input type="text" class="form-control" id="user_email" name="user_email" readonly="">
-
-                                             <label for="email">Email <span class="requireds"> (*)</span></label>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <input type="text" class="form-control" id="user_mobile" name="user_mobile">
-
-                                             <label for="mobile">Mobile <span class="requireds"> (*)</span></label>
-                                             <p style="color: red" class="with-errors" id="org_mobile"></p>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <select id="user_gender" class="form-control" name="user_gender">
-
-                                             </select>
-
-                                             <label for="sex">Giới tính</label>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <input type="text" class="form-control" id="user_birthday" name="user_birthday">
-
-                                             <label for="birthday">Ngày sinh</label>
-                                         </div>
-                                        
-                                        <div class="form-group form-md-line-input">
-                                              <textarea class="form-control" rows="3" id="user_describe" name="describe" >{{ old('describe') }}</textarea>
-                                           <label for="describe">Thông tin nhân viên</label>
-                                        </div>
-                                        
-                                        <div class="form-group form-md-line-input">
-                                             <select  id="user_type" class="form-control" name="user_type">
-                                             </select>
-                                             <label for="type">Loại</label>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <select  id="department_id" class="form-control" name="department_id">
-                                                @if(!empty($departments)) @foreach($departments as $department)
-                                                    <option value="{{$department->id}}" >{{$department->department}}</option>
-                                                @endforeach @endif
-
-                                            </select>
-                                            <label for="department_id">Phòng ban</label>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <select  id="type_job" class="form-control" name="type_job">
-                                                <option value="0" >Full-time</option>
-                                                <option value="1" >Part-time</option>
-                                             </select>
-                                             <label for="type_job">Hình thức làm việc</label>
-                                         </div>
-
-                                         <div class="form-group form-md-line-input">
-                                             <select id="user_status" class="form-control" name="user_status">
-                                             </select>
-                                         </div>
-
-                                             <div id="editImageUser">
-                                              <div class="col-md-2">
-                                                  <div class="">Hình ảnh</div>
-                                              </div>
-                                              <div class="col-md-10">
-                                                <div class="portlet-body">
-                                                   <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                      <div class="fileinput-new thumbnail" style="width: 250px; height: 200px;">
-                                                        <img id="previewimg" src="{{url('images/zents/no-image.png')}}" alt="Loading..." />
-                                                    </div>
-
-                                                    <div style="margin-top: 10px;">
-                                                        <span class="input-group-btn">
-                                                          <a id="lfm" data-input="thumbnail" data-preview="previewimg" class="btn btn-sm btn-primary choose_image">
-                                                            <i class="fa fa-picture-o"></i> Chọn
-                                                        </a>
-                                                    </span>
-
-                                                </div>
-                                                <input type="hidden" id="thumbnail" name="image" >
+                                                <input type="text" class="form-control" id="user_name" name="user_name">
+                                                <label for="name">Họ tên <span class="requireds"> (*)</span></label>
+                                            </div>
+                                            <div class="form-group form-md-line-input">
+                                                <input type="text" class="form-control" id="user_email" name="user_email">
+                                                <label for="email">Email <span class="requireds"> (*)</span></label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </form>
-                 <div style="clear: both;"></div>
-                 <div class="modal-footer">
-                    <center>
-                        <button type="button" class="btn btn-sm btn-primary red " data-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-sm btn-success " id="btnEditUser">Cập nhật</button>
-                    </center>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="clear: both;"></div>
+                    <div class="modal-footer">
+                        <center>
+                            <button type="button" class="btn btn-sm btn-primary red " data-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-sm btn-success " id="btnEditUser">Cập nhật</button>
+                        </center>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="modal fade" id="previewImg-modal">
@@ -449,7 +343,38 @@
 </script>
 <script type="text/javascript">
     $('.btn-create-user').on('click', function() {
+
         $('#create-user-modal').modal('show');
+
+        $('#formCreateUser')[0].reset();
+
+        $('#formCreateUser').on('submit', function(event) {
+            event.preventDefault();
+            var data = new FormData();
+            data.append('name', $('#name_new').val());
+            data.append('email', $('#email_new').val());
+
+            $.ajax({
+                contentType: false,
+                processData: false,
+                url: '{{ route('users.store') }}',
+                type: 'POST',
+                data: data,
+                success: function (res) {
+                    console.log(res);
+                    if (!res.error) {
+                        $('#create-user-modal').modal('hide');
+                        toastr.success(res.message);
+                        $('#users-table').DataTable().ajax.reload(null,false);
+                    }
+                    else {
+                        $.each(res.message, function( key, value ) {
+                            toastr.error(value);
+                        });
+                    }
+                }
+            });
+        });
     });
 </script>
 <script>
@@ -489,38 +414,37 @@
 
         $('#users-table').on('click', '.btn-delete', function () {
 
-          var path = "{{URL::asset('')}}users/" + $(this).data('id');
+            var path = "{{URL::asset('')}}users/" + $(this).data('id');
 
-          swal({
-           title: "Bạn có chắc muốn xóa?",
-           type: "warning",
-           showCancelButton: true,
-           confirmButtonColor: "#DD6B55",
-           cancelButtonText: "Không",
-           confirmButtonText: "Có",
+            swal({
+                title: "Bạn có chắc muốn xóa?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
 
-       },
-       function(isConfirm) {
-           if (isConfirm) {
+            },
+            function(isConfirm) {
+                if (isConfirm) {
 
-              $.ajax({
-                type: "DELETE",
-                url: path,
-                success: function(res)
-                {
-                  if(!res.error) {
-                      toastr.success('Xóa thành công!');
-                      oTable.ajax.reload(null,false);
-                  }
-              },
-              error: function (xhr, ajaxOptions, thrownError) {
-                  toastr.error(thrownError);
-              }
-          });
-
-          }
-      });
-      });
+                    $.ajax({
+                        type: "DELETE",
+                        url: path,
+                        success: function(res)
+                        {
+                            if(!res.error) {
+                                toastr.success('Xóa thành công!');
+                                oTable.ajax.reload(null,false);
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            toastr.error(thrownError);
+                        }
+                    });
+                }
+            });
+        });
     });
 
     function viewUser(id){
@@ -543,38 +467,11 @@
                     $("#info_user_name").html("<i style='color: orange'>Updatting...</i>");
                 }
 
-                if( res.mobile != null ){
-                    $("#info_user_mobile").html('<a href="tel:'+res.mobile+'">'+res.mobile+'</a>');
-                } else{
-                    $("#info_user_mobile").html("<i style='color: orange'>Updatting...</i>");
-                }
-
                 if( res.email != null ){
                     $("#info_user_email").html('<a href="mailto:'+res.email+'">'+res.email+'</a>');
                 } else{
                     $("#info_user_email").html("<i style='color: orange'>Updatting...</i>");
                 }
-
-                if( res.address != null ){
-                    $("#info_user_address").html(res.address);
-                } else{
-                    $("#info_user_address").html("<i style='color: orange'>Updatting...</i>");
-                }
-
-                if( res.work_place != null ){
-                    $("#info_user_workPlace").html(res.work_place);
-                } else{
-                    $("#info_user_workPlace").html("<i style='color: orange'>Updatting...</i>");
-                }
-
-                if( res.education != null ){
-                    $("#info_user_education").html(res.education);
-                } else{
-                    $("#info_user_education").html("<i style='color: orange'>Updatting...</i>");
-                }
-
-
-
             },
             error: function(){
 
@@ -591,47 +488,6 @@
 
                 $('#user_name').val(res.name);
                 $('#user_email').val(res.email);
-                $('#user_mobile').val(res.mobile);
-                $('#user_describe').val(res.describe);
-                $('#editUser #previewimg').attr("src","{{ asset('') }}"+res.avatar);
-
-
-                $('#user_gender').children().remove();
-                if(res.gender == 1){
-                    $('#user_gender').append('<option value="1">Nam</option><option value="0">Nữ</option>');
-                }else{
-                    $('#user_gender').append('<option value="0">Nữ</option><option value="1">Nam</option>');
-                }
-
-                var $datepicker = $('#user_birthday');
-                $datepicker.datepicker('setDate', res.birthday);
-
-                $('#user_type').children().remove();
-                if(res.type == 1){
-                    $('#user_type').append('<option value="1">Nhân viên</option><option value="2">Giáo viên</option><option value="3">Trợ giảng</option><option value="61">Giảng viên tập sự</option>');
-                }else if(res.type == 2){
-                    $('#user_type').append('<option value="2">Giáo viên</option><option value="1">Nhân viên</option><option value="3">Trợ giảng</option><option value="61">Giảng viên tập sự</option>');
-                }else if(res.type == 61){
-                    $('#user_type').append('<option value="61">Giảng viên tập sự</option><option value="1">Nhân viên</option><option value="2">Giáo viên</option><option value="3">Trợ giảng</option>');
-                }else{
-                    $('#user_type').append('<option value="3">Trợ giảng</option><option value="2">Giáo viên</option><option value="1">Nhân viên</option><option value="61">Giảng viên tập sự</option>');
-                }
-
-                $('#user_status').children().remove();
-                if(res.status == 1){
-                    $('#user_status').append('<option value="1">Hiển thị</option><option value="0">Ẩn</option>');
-                }else{
-                    $('#user_status').append('<option value="0">Ẩn</option><option value="1">Hiển thị</option>');
-                }
-
-                if(res.department_id != ''){
-                    $('#department_id').val(res.department_id);
-                }
-
-                if(res.type_job != ''){
-                    $('#type_job').val(res.type_job);
-                }
-
                 $('#user_id').val(res.id);
             },
             error: function(){
@@ -640,58 +496,29 @@
         });
     }
     $('#frmEditUser').validate({
-    errorElement: "span",
-    rules: {
-      user_name: {
-        required: true
-      },
-      user_mobile: {
-        required: true,
-        number: true,
-        minlength: 10,
-        maxlength:10,
-      },
-      user_email: {
-        required: true,
-        email: true,
-      },
-      
-    },
-    messages: {
-      
-      user_name: {
-        required: '(*) Vui lòng nhập tên liên hệ'
-      },
-      user_mobile: {
-        required: '(*) Vui lòng nhập số điện thoại liên hệ',
-        number: '(*) Số điện thoại liên hệ phải nhập kiểu số',
-        minlength: '(*) Số điện thoại có 10 số',
-        maxlength: '(*) Số điện thoại có 10 số',
-      },
-      user_email: {
-        required: '(*) Vui lòng nhập email liên hệ',
-        email: '(*) Email không đúng định dạng',
-      },
-      
-    }
-
-  });
+        errorElement: "span",
+        rules: {
+            user_name: {
+                required: true
+            },
+            user_email: {
+                required: true,
+                email: true,
+            },
+        },
+        messages: {
+            user_name: {
+                required: '(*) Vui lòng nhập tên liên hệ'
+            },
+            user_email: {
+                required: '(*) Vui lòng nhập email liên hệ',
+                email: '(*) Email không đúng định dạng',
+            },
+        }
+    });
 
     $('#btnEditUser').on('click', function() {
 
-    var mobile = $('#user_mobile').val();
-    var $valid = "valid";
-
-    // var regex = /(09|03|08|01[2|6|8|9])+([0-9]{8})\b/g;
-    var regex = /(09|03|08)+([0-9]{8})\b/g;
-
-    if (!regex.test(mobile)) {
-
-      $('#org_mobile').text("(*) Số điện thoại sai định dạng");
-
-      valid = "invalid";
-      // return valid;
-    }else{
         var check = $('#frmEditUser').valid();
         if (!check) {
           return;
@@ -700,40 +527,27 @@
             var fd = new FormData();
             fd.append('id', $('#user_id').val());
             fd.append('name', $('#user_name').val());
-            fd.append('mobile', $('#user_mobile').val());
-            fd.append('gender', $('#user_gender option:selected').val());
-            fd.append('birthday', $('#user_birthday').val());
-            fd.append('describe', $('#user_describe').val());
-            fd.append('status', $('#user_status option:selected').val());
-            fd.append('type', $('#user_type option:selected').val());
-            fd.append('type_job', $('#type_job option:selected').val());
-            fd.append('avatar', $('#editUser #thumbnail').val());
-          // fd.append('status', status);
+            fd.append('email', $('#user_email').val());
 
-          $.ajax({
-            contentType: false,
-            processData: false,
-            url: '{{ route('update-info-user') }}',
-            type: 'POST',
-            data: fd,
-            success: function (res) {
-              console.log(res);
-              if (!res.error) {
-                 $('#editUser').modal('hide');
-                 toastr[''+res.status](res.message);
-                 $('#users-table').DataTable().ajax.reload(null,false);
-              }
-              else {
-                toastr.error(res.message);
-              }
-            }
-          });
-
+            $.ajax({
+                contentType: false,
+                processData: false,
+                url: '{{ route('update-info-user') }}',
+                type: 'POST',
+                data: fd,
+                success: function (res) {
+                    console.log(res);
+                    if (!res.error) {
+                        $('#editUser').modal('hide');
+                        toastr[''+res.status](res.message);
+                        $('#users-table').DataTable().ajax.reload(null,false);
+                    } else {
+                        toastr.error(res.message);
+                    }
+                }
+            });
         }
-    }
-    
-
-  })
+    })
 </script>
 
 <script type="text/javascript">

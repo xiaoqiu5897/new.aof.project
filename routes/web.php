@@ -67,24 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('users/roles', 'User\UserController@postRoles')->name('user.update-roles');
 
-	Route::get('profiles', ['as' => 'users.profiles', 'uses' => 'User\ProfileController@getProfiles']);
-	Route::post('updateavatar', ['as' => 'users.updateavatar', 'uses' => 'User\ProfileController@updateavatar']);
-
-	Route::put('profiles', ['as' => 'users.update-profiles', 'uses' => 'User\ProfileController@putUpdateProfiles']);
-	
-	Route::put('update-password', ['as' => 'users.update-password', 'uses' => 'User\ProfileController@putUpdatePassword']);
-
-	Route::get('list-user', ['as' => 'users.list-user', 'uses' => 'User\UserController@getListUser']); 
-  
-	Route::get('users/{id}/coursewares', 'User\UserController@getCourseware');
-	Route::get('users/{id}/listCourseware', 'User\UserController@listCourseware');
-	Route::get('users/{id}/listexercise', 'User\UserController@listexercise');
-
-	Route::get('users/list-theory', 'User\UserController@getListTheory')->name('user.list-theory');
-
-	Route::post('users/toggle-theories', 'User\UserController@postToggleTheories')->name('user.toggle-theories');
-
-	Route::post('users/toggle-exercises', 'User\UserController@postToggleExercises')->name('user.toggle-exercises');
+	Route::get('list-user', ['as' => 'users.list-user', 'uses' => 'User\UserController@getListUser']);
 
 	Route::resource('users', 'User\UserController');
 
@@ -93,7 +76,15 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('update-info-user', 'User\UserController@updateInfoUser')
 	->name('update-info-user');
-
-	Route::post('unlock-user','User\UserController@unlockUser')->name('unlock_user');
+	//hết
+	//nhân viên
+	Route::resource('employees', 'EmployeeController');
+	Route::get('list-employee', ['as' => 'employees.list-employee', 'uses' => 'EmployeeController@getListEmployee']);
+	//hết
+	//nhân viên
+	Route::resource('customers', 'EmployeeController');
+	//hết
+	//nhà cung cấp
+	Route::resource('suppliers', 'EmployeeController');
 	//hết
 });

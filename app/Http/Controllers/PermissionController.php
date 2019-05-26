@@ -16,8 +16,7 @@ class PermissionController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
-
-        $this->middleware('permission:permissions-manager')->only(['index','update','store','destroy','getListPermission']);
+        $this->middleware('permission:permissions-manager')->only(['update','store','destroy','getListPermission']);
         $this->middleware('permission:permissions-detail')->only('edit');
     }
 
@@ -235,7 +234,7 @@ class PermissionController extends Controller
             return Datatables::of($permissions)
                 ->addIndexColumn()
                 ->editColumn('description', function($permissions){
-                    if (Entrust::can(["permissions-manager"])) {
+                    if (Entrust::can(["permissions-detail"])) {
                         return '<a onclick="viewDetail('.$permissions->id.');" class="btn btn-xs btn-info" title="Xem chi tiết" data-tooltip="tooltip"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                     } else {
                         return null;

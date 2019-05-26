@@ -30,7 +30,7 @@ class Role extends EntrustRole
     
  // tạo liên kết với bảng role_user qua role_id
     public function users(){
-        return $this->belongsToMany('App\Models\User','role_user','role_id', 'user_id');
+        return $this->belongsToMany('App\Models\User','role_users','role_id', 'user_id');
     }
     // tạo liên kết với bảng permission_user qua role_id
     public function permissions(){

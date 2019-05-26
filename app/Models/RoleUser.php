@@ -26,14 +26,14 @@ class RoleUser extends Model
     ];
 
 
-    protected $table="role_user";
+    protected $table="role_users";
     
     public static function getRolesUser($id_request){
-    	$data= DB::table('role_user')->select('role_id')->where('user_id',$id_request)->get();
+    	$data= DB::table('role_users')->select('role_id')->where('user_id',$id_request)->get();
     	return $data;
     }
     public static function getIDRolesUser($id_request){
-        $data= DB::table('role_user')->select('user_id')->where('user_id',$id_request)->get();
+        $data= DB::table('role_users')->select('user_id')->where('user_id',$id_request)->get();
         return $data;
     }
 }
