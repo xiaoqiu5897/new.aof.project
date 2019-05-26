@@ -29,48 +29,49 @@ class CashReceiptVoucherController extends Controller
         $receipt_vouchers = Voucher::where('type', 1)->orderBy('id','DESC');
         if (request()->ajax()) {
             return Datatables::of($receipt_vouchers)
-                ->addColumn('action', function ($receipt_voucher) {
-                    $txt = '';
+            ->addColumn('action', function ($receipt_voucher) {
+                $txt = '';
 
-                    $txt .= '<a class="btn btn-xs btn-show-obj" data-tooltip="tooltip" title="Xem chi tiết" data-show-path="'.route('cash-receipt-voucher.show',$receipt_voucher->id).'" style="background: #dc58eb; color: white"> <i class="fa fa-eye" aria-hidden="true"></i></a>';
+                $txt .= '<a class="btn btn-xs btn-show-obj" data-tooltip="tooltip" title="Xem chi tiết" data-show-path="'.route('cash-receipt-voucher.show',$receipt_voucher->id).'" style="background: #dc58eb; color: white"> <i class="fa fa-eye" aria-hidden="true"></i></a>';
+                if ($receipt_voucher->status != 1) {
+                    $txt .= '<a class="btn btn-xs btn-warning btn-edit-obj" id="edit-receipt-'.$receipt_voucher->id.'" data-tooltip="tooltip" title="Chỉnh sửa" data-edit-path=""> <i class="fa fa-edit" aria-hidden="true"></i></a>';
 
-                    $txt .= '<a class="btn btn-xs btn-warning btn-edit-obj" data-tooltip="tooltip" title="Chỉnh sửa" data-edit-path=""> <i class="fa fa-edit" aria-hidden="true"></i></a>';
-
-                    $txt .= '<a class="btn btn-xs btn-show-obj" data-tooltip="tooltip" title="Ghi sổ" data-show-path="" style="background: #71f847; color: white"> <i class="fa fa-book" aria-hidden="true"></i></a>';
+                    $txt .= '<a class="btn btn-xs btn-note-obj" id="note-receipt-'.$receipt_voucher->id.'" data-id="'.$receipt_voucher->id.'" data-tooltip="tooltip" title="Ghi sổ" data-show-path="'.route('cash-receipt-voucher.note',$receipt_voucher->id).'" style="background: #71f847; color: white"> <i class="fa fa-book" aria-hidden="true"></i></a>';
                     
-                    $txt .= '<a class="btn btn-xs btn-danger btn-delete-obj" data-tooltip="tooltip" data-delete-id="" title="Xóa"> <i class="fa fa-trash" aria-hidden="true"></i></a>';
+                    $txt .= '<a class="btn btn-xs btn-danger btn-delete-obj" id="delete-receipt-'.$receipt_voucher->id.'" data-tooltip="tooltip" data-delete-id="" title="Xóa"> <i class="fa fa-trash" aria-hidden="true"></i></a>';
+                }
 
-                    return $txt;
-                })
-                ->editColumn('code', function ($receipt_voucher){
-                    return $receipt_voucher->code;
-                })
-                ->editColumn('object_name', function ($receipt_voucher){
-                    $object = GroupObject::where('id', $receipt_voucher->object_id)->first();
-                    if(!empty($object)){
-                        return $object->name;
-                    }
-                    return 'Không xác định';
-                })
-                ->editColumn('name_payer', function ($receipt_voucher){
-                    return $receipt_voucher->name_payer;
-                })
-                ->editColumn('total_money', function ($receipt_voucher){
-                    return number_format($receipt_voucher->total_money);
-                })
-                ->editColumn('reason', function ($receipt_voucher){
-                    return $receipt_voucher->reason;
-                })
-                ->editColumn('created_at', function ($receipt_voucher){
-                    return $receipt_voucher->created_at->format('d/m/Y');
-                })
-                ->editColumn('accounting_date', function ($receipt_voucher){
-                    $accounting_date = strtotime($receipt_voucher->accounting_date);
-                    $new_accounting_date = date('d/m/Y', $accounting_date);
-                    return $new_accounting_date;
-                })
-                ->addIndexColumn()
-                ->make(true);
+                return $txt;
+            })
+            ->editColumn('code', function ($receipt_voucher){
+                return $receipt_voucher->code;
+            })
+            ->editColumn('object_name', function ($receipt_voucher){
+                $object = GroupObject::where('id', $receipt_voucher->object_id)->first();
+                if(!empty($object)){
+                    return $object->name;
+                }
+                return 'Không xác định';
+            })
+            ->editColumn('name_payer', function ($receipt_voucher){
+                return $receipt_voucher->name_payer;
+            })
+            ->editColumn('total_money', function ($receipt_voucher){
+                return number_format($receipt_voucher->total_money);
+            })
+            ->editColumn('reason', function ($receipt_voucher){
+                return $receipt_voucher->reason;
+            })
+            ->editColumn('created_at', function ($receipt_voucher){
+                return $receipt_voucher->created_at->format('d/m/Y');
+            })
+            ->editColumn('accounting_date', function ($receipt_voucher){
+                $accounting_date = strtotime($receipt_voucher->accounting_date);
+                $new_accounting_date = date('d/m/Y', $accounting_date);
+                return $new_accounting_date;
+            })
+            ->addIndexColumn()
+            ->make(true);
         }
     }
 
@@ -181,6 +182,12 @@ class CashReceiptVoucherController extends Controller
         return view('cash-receipt-voucher.show',compact('voucher', 'amount_money', 'accounting_day', 'accounting_month', 'accounting_year'));
     }
 
+    public function note($id)
+    {
+        $voucher = Voucher::find($id);
+        $voucher->status = 1;
+        $voucher->save();
+    }
     /**
      * Show the form for editing the specified resource.
      *

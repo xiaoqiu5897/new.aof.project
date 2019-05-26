@@ -20,18 +20,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('get-list-cash-receipt-voucher', 'CashReceiptVoucherController@getList')->name('get-list-cash-receipt-voucher');
 	Route::get('get-group-object', 'CashReceiptVoucherController@getGroupObject');
 	Route::resource('cash-receipt-voucher', 'CashReceiptVoucherController');
+	Route::get('cash-receipt-voucher/{id}/note', 'CashReceiptVoucherController@note')->name('cash-receipt-voucher.note');
 	//hết
 	//phiếu chi
 	Route::get('get-list-cash-payment-voucher', 'CashPaymentVoucherController@getList')->name('get-list-cash-payment-voucher');
 	Route::resource('cash-payment-voucher', 'CashPaymentVoucherController');
+	Route::get('cash-payment-voucher/{id}/note', 'CashPaymentVoucherController@note')->name('cash-payment-voucher.note');
 	//hết
 	//Giay báo có
 	Route::get('get-list-credit-note', 'CreditNoteController@getList')->name('get-list-credit-note');
 	Route::resource('credit-note', 'CreditNoteController');
+	Route::get('credit-note/{id}/note', 'CreditNoteController@note')->name('credit-note.note');
 	//hết
 	//Giay báo có
 	Route::get('get-list-standing-order', 'StandingOrderController@getList')->name('get-list-standing-order');
 	Route::resource('standing-order', 'StandingOrderController');
+	Route::get('standing-order/{id}/note', 'StandingOrderController@note')->name('standing-order.note');
 	//hết
 	//Sổ quỹ tiền mặt
 	Route::resource('cash-book', 'CashBookController');

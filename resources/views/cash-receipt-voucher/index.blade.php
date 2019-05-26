@@ -226,6 +226,38 @@
     });
 </script>
 <script type="text/javascript">
+    $(document).on('click','.btn-note-obj',function () {
+        var url = $(this).attr('data-show-path');
+        var id = $(this).attr('data-id');
+        swal({
+            title: "Bạn có chắc chắn ghi sổ chứng từ này?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    success: function(res){
+                        $("#lar_table").DataTable().ajax.reload();
+                        $('#edit-receipt-' + id + '').css('display', 'none');
+                        $('#note-receipt-' + id + '').css('display', 'none');
+                        $('#delete-receipt-' + id + '').css('display', 'none');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        toastr.error(thrownError);
+                    }
+
+
+                })
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
     $(document).on('click','.btn-delete-obj',function () {
         var id = $(this).attr('data-delete-id');
         swal({

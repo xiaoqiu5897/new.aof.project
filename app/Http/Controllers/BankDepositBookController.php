@@ -100,6 +100,7 @@ class BankDepositBookController extends Controller
         $end_date = date('Y-m-d', strtotime($end_date1));
         if ($request->start_date != '' && $request->end_date != '') {
             $vouchers = Voucher::whereBetween('accounting_date', [$start_date, $end_date])
+            ->where('vouchers.status', 1)
             ->whereIn('id', function ($query) use ($request)
             {
                 $query->select('voucher_id')
@@ -139,7 +140,7 @@ class BankDepositBookController extends Controller
                     return 'Không xác định';
                 }
             } else
-                return 'Không xác định';
+            return 'Không xác định';
         })
         ->addColumn('name_payer', function($voucher) {
             return $voucher->name_payer;
@@ -186,18 +187,23 @@ class BankDepositBookController extends Controller
             ->orWhere('voucher_details.debit_account', $request->account_finance)
             ->join('vouchers', 'vouchers.id', '=', 'voucher_details.voucher_id')
             ->whereBetween('vouchers.accounting_date', [$start_date, $end_date])
-            ->select('vouchers.code', 'vouchers.type', 'vouchers.accounting_date', 'vouchers.created_at', 'voucher_details.content', 'voucher_details.amount_money', 'voucher_details.credit_account', 'voucher_details.debit_account')
+            ->where('vouchers.status', '==', 1)
+            ->select('vouchers.code', 'vouchers.type', 'vouchers.status', 'vouchers.accounting_date', 'vouchers.created_at', 'voucher_details.content', 'voucher_details.amount_money', 'voucher_details.credit_account', 'voucher_details.debit_account')
             ->get();
         }
+        
         foreach ($voucher_details as $value) {
             $value->created_at1 = date('d/m/Y', strtotime($value->created_at));
             $value->accounting_date1 = date('d/m/Y', strtotime($value->accounting_date));
         }
+        
         $account_finance = FinanceAccount::select('code', 'name', 'surplus_debit')->where('code', $request->account_finance)->first();
+
         return response()->json([
             'reporting_period' => $reporting_period,
             'account_finance' =>  $account_finance,
             'voucher_details' =>  $voucher_details
         ]);
+
     }
 }
