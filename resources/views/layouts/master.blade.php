@@ -68,7 +68,7 @@
 
     <style type="text/css">
         @media screen and (max-width: 415px){
-         .responsemodal{
+           .responsemodal{
             width:145%;
         }
     }
@@ -90,7 +90,7 @@
         margin-top: 23%;
     }
     @media screen and (max-width: 600px){
-     .detail{
+       .detail{
         display:block;
         width:300px;
         word-wrap:break-word;
@@ -98,7 +98,7 @@
     }
 }
 @media screen and (max-width: 992px) and (min-width: 600px) {
- .detail{
+   .detail{
     display:block;
     width:400px;
     word-wrap:break-word;
@@ -107,7 +107,7 @@
 }
 
 @media screen and (min-width: 993px){
-   .detail{
+ .detail{
     display:block;
     width:700px;
     word-wrap:break-word;
@@ -205,7 +205,7 @@
                         <h3 class="uppercase">Quản lý tài chính</h3>
                     </li>
                     <li class="nav-item {{ Request::is('cash-receipt-voucher*','cash-payment-voucher*') ? 'active open' : '' }}  ">
-        
+
                         <a href="" class="nav-link nav-toggle">
                             <i class="fa fa-credit-card"></i>
                             <span class="title">Tiền mặt</span>
@@ -247,18 +247,18 @@
                             <li class="nav-item {{ Request::is('standing-order*') ? 'active open' : '' }}  ">
                                 <a href="{{ route('standing-order.index') }}" class="nav-link nav-toggle">
                                     <i class="fa fa-tasks"></i>
-                                    <span class="title">Uỷ nhiệm chi</span>
+                                    <span class="title">Giấy báo nợ</span>
                                 </a>
                             </li>
 
                         </ul>
                     </li>
                     
-                    <li class="nav-item {{ Request::is('cash-book*', 'bank-deposit-book*') ? 'active open' : '' }}  ">
+                    <li class="nav-item {{ Request::is('cash-book*', 'bank-deposit-book*', 'main-ledger*') ? 'active open' : '' }}  ">
                         <a href="" class="nav-link nav-toggle">
                             <i class="fa fa-credit-card"></i>
-                            <span class="title">Sổ quỹ</span>
-                            <span class="arrow {{ Request::is('cash-book*', 'bank-deposit-book*') ? 'open' : '' }}"></span>
+                            <span class="title">Báo cáo </span>
+                            <span class="arrow {{ Request::is('cash-book*', 'bank-deposit-book*', 'main-ledger*') ? 'open' : '' }}"></span>
                         </a>
                         <ul class="sub-menu">
 
@@ -275,30 +275,35 @@
                                     <span class="title">Sổ tiền gửi</span>
                                 </a>
                             </li>
-
-                        </ul>
-                    </li>
-
-                    <li class="nav-item {{ Request::is('main-ledger/list*') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
-                            <i class="fa fa-money" aria-hidden="true"></i>
-                            <span class="title">Sổ cái</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item {{ Request::is('revenue-expenditure*','report-collect-tuition-fee*','report-teacher-salary*') ? 'active open' : '' }}  ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="fa fa-credit-card"></i>
-                            <span class="title">Báo cáo </span>
-                            <span class="arrow {{ Request::is('revenue-expenditure*','report-collect-tuition-fee*','report-teacher-salary*') ? 'open' : '' }}"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item {{ Request::is('revenue-expenditure*') ? 'active open' : '' }}  ">
-                                <a href="" class="nav-link nav-toggle">
+                            
+                            <li class="nav-item {{ Request::is('main-ledger*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('main-ledger.index') }}" class="nav-link nav-toggle">
                                     <i class="fa fa-money" aria-hidden="true"></i>
-                                    <span class="title">Thu - Chi<span style="color: red; font-size: 12px" id="total_votes"></span></span>
+                                    <span class="title">Sổ cái</span>
                                 </a>
                             </li>
+
+                            <li class="nav-item {{ Request::is('diary-receipt*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('diary-receipt.index') }}" class="nav-link nav-toggle">
+                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                    <span class="title">Sổ nhật ký thu tiền</span>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item {{ Request::is('diary-payment*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('diary-payment.index') }}" class="nav-link nav-toggle">
+                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                    <span class="title">Sổ nhật ký chi tiền</span>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item {{ Request::is('cash-inventory*') ? 'active open' : '' }}  ">
+                                <a href="{{ route('cash-inventory.index') }}" class="nav-link nav-toggle">
+                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                    <span class="title">Báo cáo tồn quỹ</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
 
@@ -458,31 +463,31 @@
         <!-- Include Date Range Picker -->
 
         <script type="text/javascript">
-         $.ajaxSetup({
-          headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         }
-     });
+           $.ajaxSetup({
+              headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           }
+       });
 
-         function IsNull(obj)
-         {
-          var is;
-          if (obj instanceof jQuery)
-              is = obj.length <= 0;
-          else
-              is = obj === null || typeof obj === 'undefined' || obj == "";
+           function IsNull(obj)
+           {
+              var is;
+              if (obj instanceof jQuery)
+                  is = obj.length <= 0;
+              else
+                  is = obj === null || typeof obj === 'undefined' || obj == "";
 
-          return is;
+              return is;
 
-      }
+          }
 
-      var app_url = $('meta[name="website"]').attr('content');
+          var app_url = $('meta[name="website"]').attr('content');
 
 
-  </script>
+      </script>
 
-  <script>
-    $(function() {
+      <script>
+        $(function() {
 
   		// tooltip
         $("body").tooltip({ selector: '[data-tooltip=tooltip]' });
@@ -525,12 +530,12 @@
 
 <script type="text/javascript">
 
- $(document).ready(function () {
-  $(document).ajaxStart(function () {
-    $("#cover").show();
-}).ajaxStop(function () {
-    $("#cover").hide();
-});
+   $(document).ready(function () {
+      $(document).ajaxStart(function () {
+        $("#cover").show();
+    }).ajaxStop(function () {
+        $("#cover").hide();
+    });
 });
 
 </script>

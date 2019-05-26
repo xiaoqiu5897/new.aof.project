@@ -499,7 +499,7 @@
 						<th></th>
 						</tr>`)
 					$.each(response.voucher_details, function(i, item) {
-						if (item.debit_account == account_finance) { 
+						if (item.debit_account == account_finance && item.type == 1) { 
 							money += item.amount_money
 							sum_debit += item.amount_money
 							$('.voucher-detail-table').append(`
@@ -516,7 +516,7 @@
 								<td></td>
 								</tr>`)
 						}
-						if (item.credit_account == account_finance) {
+						if (item.credit_account == account_finance  && item.type == 2) {
 							money -= item.amount_money
 							sum_credit += item.amount_money
 							$('.voucher-detail-table').append(`
