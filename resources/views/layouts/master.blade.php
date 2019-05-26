@@ -305,7 +305,8 @@
                     <li class="heading">
                         <h3 class="uppercase">Quản lý danh mục</h3>
                     </li>
-
+                    {{-- @endif --}}
+                    {{-- @if(Entrust::can(["users-manager"])) --}}
                     <li class="nav-item {{ Request::is('employee*') ? 'active open' : '' }}  ">
                         <a href="{{route('employees.index')}}?type=1" class="nav-link nav-toggle">
 
@@ -313,6 +314,8 @@
                             <span class="title">Quản lý Nhân viên</span>
                         </a>
                     </li>
+                    {{-- @endif --}}
+                    {{-- @if(Entrust::can(["users-manager"])) --}}
                     <li class="nav-item {{ Request::is('customer*') ? 'active open' : '' }}  ">
                         <a href="{{route('customers.index')}}?type=2" class="nav-link nav-toggle">
 
@@ -320,6 +323,8 @@
                             <span class="title">Quản lý Khách hàng</span>
                         </a>
                     </li>
+                    {{-- @endif --}}
+                    {{-- @if(Entrust::can(["users-manager"])) --}}
                     <li class="nav-item {{ Request::is('suppliers*') ? 'active open' : '' }}  ">
                         <a href="{{route('suppliers.index')}}?type=3" class="nav-link nav-toggle">
 
@@ -327,21 +332,34 @@
                             <span class="title">Quản lý Nhà cung cấp</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
+                    {{-- @endif --}}
+                    {{-- @if(Entrust::can(["users-manager"])) --}}
+                    <li class="nav-item {{ Request::is('moneys*') ? 'active open' : '' }}  ">
+                        <a href="{{route('moneys.index')}}" class="nav-link nav-toggle">
 
                             <i class="fa fa-id-card" aria-hidden="true"></i>
                             <span class="title">Quản lý Tiền tệ</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('*department-manager*') ? 'active open' : '' }}  ">
-                        <a href="" class="nav-link nav-toggle">
+                    {{-- @endif --}}
+                    {{-- @if(Entrust::can(["users-manager"])) --}}
+                    <li class="nav-item {{ Request::is('banks*') ? 'active open' : '' }}  ">
+                        <a href="{{route('banks.index')}}" class="nav-link nav-toggle">
 
                             <i class="fa fa-id-card" aria-hidden="true"></i>
                             <span class="title">Quản lý Ngân hàng</span>
                         </a>
                     </li>
+                    {{-- @endif --}}
+                    {{-- @if(Entrust::can(["users-manager"])) --}}
+                    <li class="nav-item {{ Request::is('bank-accounts*') ? 'active open' : '' }}  ">
+                        <a href="{{route('bank-accounts.index')}}" class="nav-link nav-toggle">
 
+                            <i class="fa fa-id-card" aria-hidden="true"></i>
+                            <span class="title">Quản lý TK ngân hàng</span>
+                        </a>
+                    </li>
+                    {{-- @endif --}}
                     {{-- end --}}
 
                     {{-- STUDENT --}}

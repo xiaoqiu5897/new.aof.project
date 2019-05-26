@@ -22,4 +22,8 @@ class Bank extends Authenticatable
     public function employees() {
         return $this->hasMany('App\Models\Employee','bank_id');
     }
+
+    public function bankAccounts() {
+        return $this->hasMany('App\Models\BankAccount','bank_id');
+    }
 }
